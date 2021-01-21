@@ -10,13 +10,15 @@ package modele;
  * @author Jones
  */
 public class Client {
-    String name;
-    String username;
-    String password;
+    private String name;
+    private String username;
+    private String password;
 
+    
     public Client(){
         
     }
+    
     
     public Client(String name, String username, String password) {
         this.name = name;
@@ -29,27 +31,39 @@ public class Client {
         return name;
     }
 
+    
     public void setName(String name) {
         this.name = name;
     }
 
+    
     public String getUsername() {
         return username;
     }
 
+    
     public void setUsername(String username) {
         this.username = username;
     }
 
+    
     public String getPassword() {
         return password;
     }
 
+    
     public void setPassword(String password) {
         this.password = password;
     }
-
-   
+    
+    /**
+     * Converti un objet Client en ligne
+     * @param client
+     * @return
+     */
+    public static String convertirClientLigne(Client client){
+        return client.getName() + ";" + client.getUsername() + ";" + client.getPassword();
+    }
 
     @Override
     public String toString() {
