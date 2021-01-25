@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utils.FileManip;
 import utils.FormValidation;
+import utils.UserSession;
 
 /**
  *
@@ -22,7 +23,7 @@ public class FenConnection extends javax.swing.JFrame {
     public FenConnection() {
         initComponents();
         FileManip.chargerCollectionClient();
-
+        this.getRootPane().setDefaultButton(btnLogin);
     }
 
     /**
@@ -155,17 +156,17 @@ public class FenConnection extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
+        
         if(FormValidation.verifierSaisie_LOGIN(userField.getText(), passField.getPassword())){
-            StringBuilder pass = new StringBuilder();
-            for (char c : passField.getPassword()){
-                pass.append(c);
-            }
-            String[] loginInfo = {userField.getText(), pass.toString()};
-            
-            if(FileManip.chercherClient(loginInfo)){
+            String pass = String.valueOf(passField.getPassword());
+            if(FileManip.chercherClientDansSet(userField.getText(), pass)){
+                UserSession.client = FileManip.getClientFromFile(userField.getText(), pass);
                 JOptionPane.showMessageDialog(rootPane, "NICE SHIT BRO WELCOME",
                     "Bienvenue !", JOptionPane.PLAIN_MESSAGE);
+                FenAppUI fenAppUi = new FenAppUI();
+                fenAppUi.setVisible(true);
+                fenAppUi.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                this.dispose();
             } else {
             JOptionPane.showMessageDialog(rootPane, "Informations de connexion incorrectes.",
                     "Mauvais login", JOptionPane.ERROR_MESSAGE);
@@ -174,7 +175,6 @@ public class FenConnection extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Veuillez saisir vos informations.",
                     "Données manquantes.", JOptionPane.INFORMATION_MESSAGE);
         }
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitterActionPerformed

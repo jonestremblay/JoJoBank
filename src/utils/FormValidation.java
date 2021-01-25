@@ -5,6 +5,9 @@
  */
 package utils;
 
+import javax.swing.JTextField;
+import ui.FenAppUI;
+
 /**
  *
  * @author Jones
@@ -47,19 +50,33 @@ public class FormValidation {
         int digit = 0;
         int symbol = 0;
         char[] chars = pass.toCharArray();
-        for (char c: chars){
-            if (Character.getNumericValue(c) <= 90 && Character.getNumericValue(c) >= 65){
+        for (int c: chars){
+            System.out.println(c);
+            if (c <= 90 && c >= 65){
                 maj++;
-            } else if (Character.getNumericValue(c) <= 57 && Character.getNumericValue(c) >= 48){
+            }  
+            if (c <= 57 && c >= 48){
                 digit++;
-            } else if (Character.getNumericValue(c) <= 47 && Character.getNumericValue(c) >= 32){
+            } 
+            if (c <= 47 && c >= 32){
                 symbol++;
             }
         }
-        if(maj>= 1 && digit >= 1 && symbol >= 1){
+        System.out.println(maj + ";" + digit + ";" + symbol);
+         
+        if(pass.length() < 8){
+            return false;
+        }else if(maj>= 1 && digit >= 1 && symbol >= 1){
             return true;
         } else {
             return false;
         }
+    }
+    
+    public static boolean requiredFieldsFilled(JTextField name, JTextField user, JTextField pass){
+        if (name.getText().isEmpty() || user.getText().isEmpty() || pass.getText().isEmpty()){
+            return false;
+        }
+        return true;
     }
 }

@@ -75,7 +75,7 @@ public class FileManip {
      *          Suite à la lecture du registre...
      * @return  [false: existePas , true: existe]
      */
-    public static boolean chercherClient(String[] loginInfo){
+    public static Client getClientFromFile(String username, String password){
          // 1. create the directory where the files are stored, if not already.
         Path path = Paths.get(DIRECTORY);
         try {
@@ -87,13 +87,24 @@ public class FileManip {
         File registre = new File(DIRECTORY + "/" + "registre.txt");
         FileReader fr = null;
         BufferedReader br = null;
-        boolean clientExist = false;
         try {
             fr = new FileReader(registre);
             br = new BufferedReader(fr);
             String ligne;
             while ((ligne = br.readLine()) != null){
-                clientExist = verifierClientExiste(decryptData(ligne), loginInfo);
+                //clientExist = verifierClientExiste(decryptData(ligne), loginInfo);
+                ligne = decryptData(ligne);
+                String[] tokens = ligne.split(";");
+                // No need for variables here, but for reading purposes...
+                String nameRegistre = tokens[0];
+                String userRegistre = tokens[1];
+                String passRegistre = tokens[2];
+
+                if(username.equals(userRegistre)){
+                    if(password.equals(passRegistre)){
+                        return new Client(tokens[0], tokens[1], tokens[2]);
+                    }
+                }
             }
         } catch (IOException e){
             Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
@@ -106,9 +117,20 @@ public class FileManip {
                 }
             }
         }
-        return clientExist;
+        return new Client(); 
+    // Should never happen since the method is called after checking the user exists
     }
     
+    
+    public static boolean chercherClientDansSet(String user, String pass){
+        Client client = new Client(user, pass);
+        for (Object c : ListeClient.getListeClient()){
+            if (client.equals(c)){
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      *
      * @param data
@@ -116,14 +138,14 @@ public class FileManip {
      */
     public static String encryptData(String data){
         final int KEY = 14;
-        System.out.println("Encryption en cours...");
+        //System.out.println("Encryption en cours...");
         StringBuilder encryptedData = new StringBuilder();
         char[] dataChars = data.toCharArray();
         for (char c : dataChars){
             c += KEY;
             encryptedData.append(c);
         }
-        System.out.println(encryptedData.toString());
+        //System.out.println(encryptedData.toString());
         return encryptedData.toString();
     }
     
@@ -134,39 +156,18 @@ public class FileManip {
      */
     public static String decryptData(String encryptedData){
         final int KEY = 14;
-        System.out.println("Décryption en cours...");
+        //System.out.println("Décryption en cours...");
         StringBuilder decryptedData = new StringBuilder();
         char[] dataChars = encryptedData.toCharArray();
         for(char c : dataChars){
             c -= KEY;
             decryptedData.append(c);
         }
-        System.out.println(decryptedData.toString());
+        //System.out.println(decryptedData.toString());
         return decryptedData.toString();
     }
     
-    /**
-     *
-     * @param decryptedLigne
-     * @param loginInfo
-     * @return [Si le client existe dans le registre]
-     */
-    public static boolean verifierClientExiste(String decryptedLigne, String[] loginInfo){
-        boolean exist = false;
-        String[] tokens = decryptedLigne.split(";");
-        // No need for variables here, but for reading purposes...
-        String userRegistre = tokens[1];
-        String passRegistre = tokens[2];
-        
-        if(loginInfo[0].equals(userRegistre)){
-            if(loginInfo[1].equals(passRegistre)){
-                exist = true;
-            }
-        } else {
-            exist = false;
-        }
-        return exist;
-    }
+ 
     
     /**
      * Charge la collection contenant les clients inscrits,

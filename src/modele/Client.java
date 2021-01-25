@@ -64,10 +64,9 @@ public class Client{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + Objects.hashCode(this.username);
-        hash = 67 * hash + Objects.hashCode(this.password);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.username);
+        hash = 97 * hash + Objects.hashCode(this.password);
         return hash;
     }
 
@@ -83,9 +82,6 @@ public class Client{
             return false;
         }
         final Client other = (Client) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
@@ -94,6 +90,8 @@ public class Client{
         }
         return true;
     }
+
+    
     
     
     
