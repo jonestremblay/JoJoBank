@@ -58,6 +58,11 @@ public class FenAppUI extends javax.swing.JFrame {
 
         btnSeeExpenses.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         btnSeeExpenses.setText("See expenses");
+        btnSeeExpenses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeeExpensesActionPerformed(evt);
+            }
+        });
 
         btnAddExpenses.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         btnAddExpenses.setText("Add expense");
@@ -153,15 +158,21 @@ public class FenAppUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddExpensesActionPerformed
-        // TODO add your handling code here:
+        FenAddExpense fenAddExpense = new FenAddExpense();
+        fenAddExpense.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAddExpensesActionPerformed
 
     private void btnAddViewBillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddViewBillsActionPerformed
-        // TODO add your handling code here:
+        FenBills fenBills = new FenBills();
+        fenBills.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAddViewBillsActionPerformed
 
     private void btnYouOweActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYouOweActionPerformed
-        // TODO add your handling code here:
+        FenOwing fenOwing = new FenOwing();
+        fenOwing.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnYouOweActionPerformed
 
     private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
@@ -170,6 +181,12 @@ public class FenAppUI extends javax.swing.JFrame {
         fenConnection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_btnDisconnectActionPerformed
+
+    private void btnSeeExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeExpensesActionPerformed
+        FenExpenses fenExpenses = new FenExpenses();
+        fenExpenses.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSeeExpensesActionPerformed
     
     private void setClientNameLabel(){
         UserSession.client.getName();

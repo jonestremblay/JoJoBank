@@ -16,7 +16,7 @@ public class Client{
     private String username;
     private String password;
 
-    
+    private ListeFacture listeFacture;
     public Client(){
         
     }
@@ -30,6 +30,7 @@ public class Client{
         this.name = name;
         this.username = username;
         this.password = password;
+        this.listeFacture = new ListeFacture();
     }
     
     
@@ -61,7 +62,15 @@ public class Client{
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    public ListeFacture getListeFacture() {
+        return listeFacture;
+    }
+    
+    public void setListeFacture(ListeFacture listeFacture) {
+        this.listeFacture = listeFacture;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -90,10 +99,6 @@ public class Client{
         }
         return true;
     }
-
-    
-    
-    
     
     /**
      * Converti un objet Client en ligne
@@ -103,7 +108,11 @@ public class Client{
     public static String convertirClientLigne(Client client){
         return client.getName() + ";" + client.getUsername() + ";" + client.getPassword();
     }
-
+    
+    
+    
+    
+    
     @Override
     public String toString() {
         return username;

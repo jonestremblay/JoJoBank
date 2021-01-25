@@ -8,6 +8,7 @@ package control;
 import java.util.HashSet;
 import javax.swing.JFrame;
 import modele.ListeClient;
+import ui.FenBills;
 import ui.FenConnection;
 import utils.FileManip;
 
@@ -28,6 +29,8 @@ public class AppCtr {
             fenConnection.setSize(660, 550);
             fenConnection.setVisible(true);
             fenConnection.setTitle("Connexion à Jojo's Bank");
+           
+            
     }
     
 }
