@@ -25,6 +25,7 @@ public class AppCtr {
             FileManip.chargerCollectionClient();
             FenConnection fenConnection = new FenConnection();
             fenConnection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            fenConnection.setSize(660, 550);
             fenConnection.setVisible(true);
             fenConnection.setTitle("Connexion à Jojo's Bank");
     }

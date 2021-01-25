@@ -12,7 +12,7 @@ import modele.Client;
  * @author Jones
  */
 public class UserSession {
-    public static Client client;
+    public static Client client;    
 
     public UserSession(){
         
