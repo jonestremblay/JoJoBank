@@ -21,6 +21,8 @@ public class FenConnection extends javax.swing.JFrame {
      */
     public FenConnection() {
         initComponents();
+        FileManip.chargerCollectionClient();
+
     }
 
     /**
@@ -146,9 +148,7 @@ public class FenConnection extends javax.swing.JFrame {
     }//GEN-LAST:event_userFieldActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-//        java.awt.EventQueue.invokeLater(() -> {
-//            new FenRegister().setVisible(true);
-//        });
+
         FenRegister fenRegister = new FenRegister();
         fenRegister.setVisible(true);
         fenRegister.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -163,8 +163,7 @@ public class FenConnection extends javax.swing.JFrame {
             }
             String[] loginInfo = {userField.getText(), pass.toString()};
             
-            boolean success = FileManip.lireRegistreClients(loginInfo);
-            if(success){
+            if(FileManip.chercherClient(loginInfo)){
                 JOptionPane.showMessageDialog(rootPane, "NICE SHIT BRO WELCOME",
                     "Bienvenue !", JOptionPane.PLAIN_MESSAGE);
             } else {

@@ -5,7 +5,9 @@
  */
 package control;
 
+import java.util.HashSet;
 import javax.swing.JFrame;
+import modele.ListeClient;
 import ui.FenConnection;
 import utils.FileManip;
 
@@ -20,7 +22,7 @@ public class AppCtr {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-          
+            FileManip.chargerCollectionClient();
             FenConnection fenConnection = new FenConnection();
             fenConnection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             fenConnection.setVisible(true);

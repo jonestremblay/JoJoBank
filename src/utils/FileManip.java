@@ -14,9 +14,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Client;
+import modele.ListeClient;
 
 /**
  *
@@ -24,8 +28,10 @@ import modele.Client;
  */
 public class FileManip {
     
+    final static String DIRECTORY = "DATA/registreClients";
+
     /**
-     * Cette méthode écris dans le registre un nouveau client
+     * Cette méthode écris dans le fichier registre un nouveau client
      * de la banque, de façon encrypté.
      * @param client
      */
@@ -62,39 +68,32 @@ public class FileManip {
         }
     }
     
-    
     /**
-     * Cette méthode ne fais pas seulement que lire le registre, 
-     * elle le décrypte(à sa lecture) au passage, et vérifie en même temps
-     * si le client existe dans notre registre de clients.
+     * Cette méthode lit le registre, le décrypte au passage, afin de vérifier
+     * si le client en paramètre existe.
      * @param loginInfo
      *          Suite à la lecture du registre...
      * @return  [false: existePas , true: existe]
      */
-    public static boolean lireRegistreClients(String[] loginInfo){
+    public static boolean chercherClient(String[] loginInfo){
          // 1. create the directory where the files are stored, if not already.
-        String directory = "DATA/registreClients";
-        Path path = Paths.get(directory);
+        Path path = Paths.get(DIRECTORY);
         try {
             Files.createDirectories(path);
         } catch (IOException ex) {
             Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
         }
         // 2. Read the file
-        File registre = new File(directory + "/" + "registre.txt");
+        File registre = new File(DIRECTORY + "/" + "registre.txt");
         FileReader fr = null;
         BufferedReader br = null;
         boolean clientExist = false;
         try {
             fr = new FileReader(registre);
             br = new BufferedReader(fr);
-            
-            // Lecture 
             String ligne;
-            //StringBuilder decrypted = new StringBuilder();
             while ((ligne = br.readLine()) != null){
                 clientExist = verifierClientExiste(decryptData(ligne), loginInfo);
-               // decrypted.append(decryptData(ligne)).append("\n");
             }
         } catch (IOException e){
             Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
@@ -167,5 +166,48 @@ public class FileManip {
             exist = false;
         }
         return exist;
+    }
+    
+    /**
+     * Charge la collection contenant les clients inscrits,
+     * à partir du registreClient(fichier).
+     */
+    public static void chargerCollectionClient(){
+        // 1. Store les client en hashset
+        Set listeClient = new HashSet();
+        File registre = new File(DIRECTORY + "/" + "registre.txt");
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(registre);
+            br = new BufferedReader(fr);
+            String ligne;
+            while ((ligne = br.readLine()) != null){
+                listeClient.add(convertirLigneClient(decryptData(ligne), ";"));
+            }
+        } catch (IOException e){
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (br != null){
+                try{
+                    br.close();
+                } catch (IOException e){
+                    Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+        }
+        
+        ListeClient.setListeClient(listeClient);
+    }
+    
+    /**
+     *
+     * @param ligne
+     * @param delimeter ; , . / (what separate values in CSV file)
+     * @return
+     */
+    public static Client convertirLigneClient(String ligne, String delimeter){
+        String[] tokens = ligne.split(delimeter);
+        return new Client(tokens[0], tokens[1], tokens[2]);
     }
 }
