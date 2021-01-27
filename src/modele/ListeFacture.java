@@ -7,18 +7,21 @@ package modele;
 
 import java.util.ArrayList;
 
+
 /**
  *
  * @author Jones
  */
 public class ListeFacture {
-    private  ArrayList<Facture> listeFacture;
+    private static ArrayList<Facture> listeFacture;
+
+   
     
     public ListeFacture(){
         listeFacture = new ArrayList<Facture>();
     }
 
-    public ArrayList<Facture> getListeFacture() {
+    public  ArrayList<Facture> getListeFacture() {
         return listeFacture;
     }
 
@@ -26,4 +29,34 @@ public class ListeFacture {
         this.listeFacture = listeFacture;
     }    
     
+    public void add(Facture facture){
+        this.listeFacture.add(facture);
+    }
+    
+    
+    public void remove(Facture facture){
+        this.listeFacture.remove(facture);
+    }
+    
+    public Double calculerSommeFactureMensuelle(){
+        double montant = 0;
+        for(Facture f : listeFacture){
+            if(f.dateLimite.contains(" du mois")){
+                montant += f.montant;
+            }
+        }
+        return montant;
+    }
+    
+    public Double calculerSommeFactureUnique(){
+        double montant = 0;
+        for(Facture f : listeFacture){
+            if(!f.dateLimite.contains(" du mois")){
+                montant += f.montant;
+            }
+        }
+        return montant;
+    }
+
+   
 }

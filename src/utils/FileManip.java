@@ -75,8 +75,8 @@ public class FileManip {
     /**
      * Cette méthode lit le registre, le décrypte au passage, afin de vérifier
      * si le client en paramètre existe.
-     * @param loginInfo
-     *          Suite à la lecture du registre...
+     * @param username
+     * @param password
      * @return  [false: existePas , true: existe]
      */
     public static Client getClientFromFile(String username, String password){
@@ -219,11 +219,9 @@ public class FileManip {
     
     /**
      *
-     * @param
-     * @param 
-     * @return
+     * @param client@return
      */
-    public static void lireFichierAjouterFacture(Client client){
+    public static ListeFacture lireFichierAjouterFacture(Client client){
         // methode pour lire dans le fichier les factures, 
         // créer des objets pour chaque ligne lue, et l'ajouter dans la liste.   
           // 1. create the directory where the files are stored, if not already.
@@ -238,14 +236,15 @@ public class FileManip {
         File registre = new File(repertoire + "/" + client.getUsername() + "-factures.txt");
         FileReader fr = null;
         BufferedReader br = null;
+        ListeFacture lf = new ListeFacture();
         try {
             fr = new FileReader(registre);
             br = new BufferedReader(fr);
             String ligne;
-            ListeFacture listeFacture = new ListeFacture();
             while ((ligne = br.readLine()) != null){
-               listeFacture.getListeFacture().add(convertirLigneFacture(ligne));
+               lf.getListeFacture().add(convertirLigneFacture(ligne));
             }
+            return lf;
         } catch (IOException e){
             Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -257,19 +256,22 @@ public class FileManip {
                 }
             }
         }
-     
+        return lf;
     }
     
+//    public static Facture convertirLigneFacture(String ligne){
+//        String[] tokens = ligne.split(";");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mon-yyyy", Locale.CANADA_FRENCH);
+//        LocalDate dateLimite = LocalDate.parse(tokens[3], formatter);
+//        return new Facture(tokens[1], tokens[2], dateLimite , Double.parseDouble(tokens[4]));
+//    }
     public static Facture convertirLigneFacture(String ligne){
         String[] tokens = ligne.split(";");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mon-yyyy", Locale.CANADA_FRENCH);
-        LocalDate dateLimite = LocalDate.parse(tokens[3], formatter);
-        return new Facture(Integer.parseInt(tokens[0]), 
-                                tokens[1], tokens[2], dateLimite , Double.parseDouble(tokens[4]));
+        return new Facture(tokens[0], tokens[1], tokens[2], Double.parseDouble(tokens[3]));
     }
     
     
-    public static void ecrireFactureFichier(Client client, Facture bill){
+    public static void ecrireFactureFichier(Client client, Facture facture){
         String repertoire = "DATA/registreFactures";
         Path path = Paths.get(repertoire);
         try {
@@ -286,7 +288,7 @@ public class FileManip {
             fw = new FileWriter(registre, true);
             bw = new BufferedWriter(fw);
             // Écriture
-            bw.write(bill.convertirFactureEnLigne()+ "\n");
+            bw.write(facture.convertirFactureEnLigne()+ "\n");
         } catch (IOException e){
             Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -300,4 +302,80 @@ public class FileManip {
         }
     }
 
+    /**
+     * Get new ListeFacture after having deleted the choosen row, so we could rewrite the file.
+     * @param client
+     * @param facture
+     * @return
+     */
+    public static ListeFacture getNewListeFactureAfterDeletion(Client client, Facture factureToDelete){
+          // 1. create the directory where the files are stored, if not already.
+        String repertoire = "DATA/registreFactures";
+        Path path = Paths.get(repertoire);
+        try {
+            Files.createDirectories(path);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // 2. Read the file
+        File registre = new File(repertoire + "/" + client.getUsername() + "-factures.txt");
+        FileReader fr = null;
+        BufferedReader br = null;
+        ListeFacture lf = new ListeFacture();
+        String lineToRemove = factureToDelete.convertirFactureEnLigne();
+        try {
+            fr = new FileReader(registre);
+            br = new BufferedReader(fr);
+            String ligne;
+            while ((ligne = br.readLine()) != null){
+               if(!ligne.equals(lineToRemove)){
+                    lf.getListeFacture().add(convertirLigneFacture(ligne));}
+            }
+            return lf;
+        } catch (IOException e){
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (br != null){
+                try{
+                    br.close();
+                } catch (IOException e){
+                    Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+        }
+        return lf;
+    }
+    
+    public static void ecrireListeFactureDansFichier(Client client, ListeFacture lf){
+        String repertoire = "DATA/registreFactures";
+        Path path = Paths.get(repertoire);
+        try {
+            Files.createDirectories(path);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // 2. Create the file for the data.
+        File registre = new File(repertoire + "/" + client.getUsername() + "-factures.txt");
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter(registre, true);
+            bw = new BufferedWriter(fw);
+            // Écriture
+            for (Facture f: lf.getListeFacture()){
+                bw.write(f.convertirFactureEnLigne() + "\n");
+            }
+        } catch (IOException e){
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (bw != null){
+                try {
+                    bw.close();
+                } catch (IOException ex){
+                    Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }

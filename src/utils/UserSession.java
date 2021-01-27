@@ -5,23 +5,29 @@
  */
 package utils;
 
+import java.util.ArrayList;
 import modele.Client;
+import modele.Facture;
+import modele.ListeFacture;
 
 /**
  *
  * @author Jones
  */
 public class UserSession {
-    public static Client client;    
-
-    public UserSession(){
-        
-    }
-    
-    public UserSession(Client client){
-        this.client = client;
-    }
-    
+    public static Client client = new Client();
+//    public static ArrayList<Facture> listeFactures = new ArrayList<>();
+//
+//    public UserSession(){
+//        
+//    }
+//    
+//    public UserSession(Client client){
+//        this.client = client;
+//        this.listeFactures = new ArrayList<Facture>();
+//
+//    }
+   
  
     
 }

@@ -6,42 +6,38 @@
 package modele;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import ui.FenBills;
 
 /**
  *
  * @author Jones
  */
 public class Facture {
-    int facture_id;
     String description;
     String creancier;
     double montant;
-    LocalDate dateLimite;
+    String dateLimite;
     
     public Facture(){
         
     }
 
-    public Facture(int facture_id, String creancier, String description, LocalDate dateLimite, double montant) {
-        this.facture_id = facture_id;
+    public Facture(String creancier, String description, String dateLimite, double montant) {
         this.description = description;
         this.creancier = creancier;
         this.montant = montant;
         this.dateLimite = dateLimite;
     }
 
-    public int getFacture_id() {
-        return facture_id;
-    }
-
-    public void setFacture_id(int facture_id) {
-        this.facture_id = facture_id;
-    }
+   
 
     public String getDescription() {
         return description;
@@ -67,39 +63,50 @@ public class Facture {
         this.montant = montant;
     }
 
-    public LocalDate getDateLimite() {
+    public String getDateLimite() {
         return dateLimite;
     }
 
-    public void setDateLimite(LocalDate dateLimite) {
+    public void setDateLimite(String dateLimite) {
         this.dateLimite = dateLimite;
     }
     
-    public void incrementerID(){
-        facture_id++;
-    }
     
     /*
     Retourne facture en format CSV. 
     */
     public String convertirFactureEnLigne(){
-        return String.valueOf(facture_id) + ";" + 
-               creancier + ";" +
+        return creancier + ";" +
                description + ";" +
-               getDateString() + ";" +
+               dateLimite + ";" +
                String.valueOf(montant);
 
     }
     
-    public String getDateString(){
-        DateFormat df = new SimpleDateFormat("dd-mon-yyyy");
-        return df.format(dateLimite);
+//    public String getDateString(){
+//        DateFormat df = new SimpleDateFormat("dd MMM yy");
+//        return df.format(dateLimite);
+//    }
+    
+    public static Date formatDateFactureUnique(String dateString){
+        DateFormat df = new SimpleDateFormat("dd mm yy");
+        Date date = new Date();
+        try {
+            date = df.parse(dateString);
+        } catch (ParseException ex) {
+            Logger.getLogger(FenBills.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return date;
     }
     
+   
+    public static String formatDateFactureMensuelle(String jourDate){
+        return jourDate + " du mois";
+    }
 
     @Override
     public String toString() {
-        return "Facture{" + "facture_id=" + facture_id + ", description=" + description + ", creancier=" + creancier + ", montant=" + montant + ", dateLimite=" + dateLimite + '}';
+        return "Facture{" + "description=" + description + ", creancier=" + creancier + ", montant=" + montant + ", dateLimite=" + dateLimite + '}';
     }
     
     

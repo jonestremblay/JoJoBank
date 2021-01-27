@@ -1,0 +1,11 @@
+Mastercard;Carte crédit;27 du mois;80.0
+xx;Prêt perso.;27 du mois;213.89
+Espace 160;Loyer;1er du mois;287.50
+xx;Ordi;01-12-22;700.00
+Desjardins;Prêt hypothécaire;6 du mois;650.76
+Desjardins;Prêt hypothécaire;6 du mois;650.76
+aa;dd;12  ;700.0
+aa;dd;12 du mois;700.0
+sd;sd;;2.0
+asas;asas;22 1 22;222.0
+asdasd23;asddsasd2;12 12 12;333.0

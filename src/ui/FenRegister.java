@@ -142,7 +142,7 @@ public class FenRegister extends javax.swing.JFrame {
         
         // catch les input values (name, username, pass)
         if(FormValidation.requiredFieldsFilled(nameField, usernameField, passwordField)){
-            if (FormValidation.isValid(passwordField.getText())){
+            if (FormValidation.passIsValid(passwordField.getText())){
             String name = nameField.getText();
             String username = usernameField.getText();
             String password = passwordField.getText();

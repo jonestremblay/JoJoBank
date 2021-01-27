@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/modele/ListeFacture.java</file>
             <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/control/AppCtr.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/ui/FenAppUI.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/utils/FileManip.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/ui/FenRegister.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/utils/FormValidation.java</file>
+            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/modele/Facture.java</file>
             <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/ui/FenConnection.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/utils/UserSession.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/modele/ListeClient.java</file>
-            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/modele/Client.java</file>
+            <file>file:/C:/Users/Jones/Documents/NetBeansProjects/FinanceApp/src/ui/FenBills.java</file>
         </group>
     </open-files>
 </project-private>

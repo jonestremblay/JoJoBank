@@ -8,7 +8,32 @@ package ui;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import modele.Facture;
+import modele.FactureTableModel;
+import modele.ListeFacture;
+import utils.FileManip;
+import utils.FormValidation;
+import utils.UserSession;
 
 /**
  *
@@ -32,6 +57,7 @@ public class FenBills extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        radioBtnGroup = new javax.swing.ButtonGroup();
         btnMenuPrincipal = new javax.swing.JButton();
         jPanel2 = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -40,8 +66,6 @@ public class FenBills extends javax.swing.JFrame {
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };  ;
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel3 = new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
@@ -49,6 +73,29 @@ public class FenBills extends javax.swing.JFrame {
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };  ;
+        creancierField = new javax.swing.JTextField();
+        descriptionField = new javax.swing.JTextField();
+        montantField = new javax.swing.JTextField();
+        ddField = new javax.swing.JTextField();
+        mmField = new javax.swing.JTextField();
+        yyField = new javax.swing.JTextField();
+        rBtnFactureUnique = new javax.swing.JRadioButton();
+        rBtnFactureMensuelle = new javax.swing.JRadioButton();
+        lblDD = new javax.swing.JLabel();
+        lblMM = new javax.swing.JLabel();
+        lblYY = new javax.swing.JLabel();
+        lblCreancier = new javax.swing.JLabel();
+        lblDescription = new javax.swing.JLabel();
+        lblMontant = new javax.swing.JLabel();
+        lblDateLimite = new javax.swing.JLabel();
+        btnAjouterFacture = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        factureTable = new javax.swing.JTable();
+        lblMensualiteString = new javax.swing.JLabel();
+        lblMensualite = new javax.swing.JLabel();
+        lblTotalDettesString = new javax.swing.JLabel();
+        lblTotalDette = new javax.swing.JLabel();
+        btnDeleteRow = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Your bills");
@@ -71,19 +118,6 @@ public class FenBills extends javax.swing.JFrame {
             .addGap(0, 174, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -95,46 +129,232 @@ public class FenBills extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(369, 369, 369)
-                        .addComponent(btnMenuPrincipal))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 72, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(187, 187, 187))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnMenuPrincipal)
-                .addGap(21, 21, 21))
-        );
+        creancierField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creancierFieldActionPerformed(evt);
+            }
+        });
 
-        pack();
-        setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+        radioBtnGroup.add(rBtnFactureUnique);
+        rBtnFactureUnique.setText("Facture unique");
+        rBtnFactureMensuelle.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent ie){
+                    mmField.setEnabled(false); mmField.setText("");
+                    yyField.setEnabled(false); yyField.setText("");
+                }
+            });
+            rBtnFactureUnique.addActionListener(
+                new ActionListener(){
+                    public void actionPerformed(ActionEvent ie){
+                        ddField.setEnabled(true); ddField.setText("");
+                        mmField.setEnabled(true); mmField.setText("");
+                        yyField.setEnabled(true); yyField.setText("");
+                    }
+                });
+                rBtnFactureUnique.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        rBtnFactureUniqueActionPerformed(evt);
+                    }
+                });
+
+                radioBtnGroup.add(rBtnFactureMensuelle);
+                rBtnFactureMensuelle.setText("Facture mensuelle");
+                rBtnFactureMensuelle.addActionListener(
+                    new ActionListener(){
+                        public void actionPerformed(ActionEvent ie){
+                            mmField.setEnabled(false); mmField.setText("");
+                            yyField.setEnabled(false); yyField.setText("");
+                        }
+                    });
+                    rBtnFactureUnique.addActionListener(
+                        new ActionListener(){
+                            public void actionPerformed(ActionEvent ie){
+                                ddField.setEnabled(true); ddField.setText("");
+                                mmField.setEnabled(true); mmField.setText("");
+                                yyField.setEnabled(true); yyField.setText("");
+                            }
+                        });
+
+                        lblDD.setText("DD");
+
+                        lblMM.setText("MM");
+
+                        lblYY.setText("YY");
+
+                        lblCreancier.setText("Créancier");
+
+                        lblDescription.setText("Description");
+
+                        lblMontant.setText("Montant");
+
+                        lblDateLimite.setText("Date limite");
+
+                        btnAjouterFacture.setText("Ajouter facture");
+                        btnAjouterFacture.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnAjouterFactureActionPerformed(evt);
+                            }
+                        });
+
+                        FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
+                        factureTable.setModel(model);
+                        jScrollPane2.setViewportView(factureTable);
+
+                        lblMensualiteString.setText("Mensualité totale :");
+
+                        lblMensualite.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+                        String mensualite = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureMensuelle());
+                        lblMensualite.setText(mensualite + " $");
+
+                        lblTotalDettesString.setText("Total des dettes   :");
+
+                        lblTotalDette.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+                        String dettes = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureUnique());
+                        lblTotalDette.setText(dettes + " $");
+
+                        btnDeleteRow.setText("Delete row");
+                        btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnDeleteRowActionPerformed(evt);
+                            }
+                        });
+
+                        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                        getContentPane().setLayout(layout);
+                        layout.setHorizontalGroup(
+                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnMenuPrincipal)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(66, 66, 66)
+                                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(113, 113, 113)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnAjouterFacture)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(creancierField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                .addComponent(descriptionField))
+                                            .addComponent(lblCreancier)
+                                            .addComponent(lblDescription)
+                                            .addComponent(lblDateLimite)
+                                            .addComponent(lblMontant)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(montantField, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addGap(6, 6, 6)
+                                                                .addComponent(lblDD)))
+                                                        .addGap(18, 18, 18)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addGap(6, 6, 6)
+                                                                .addComponent(lblMM)))))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(lblYY)))))
+                                        .addGap(135, 135, 135))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rBtnFactureUnique)
+                                            .addComponent(rBtnFactureMensuelle))))
+                                .addGap(46, 46, 46))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDeleteRow)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblMensualiteString)
+                                            .addComponent(lblTotalDettesString))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblTotalDette)
+                                            .addComponent(lblMensualite))))
+                                .addGap(0, 14, Short.MAX_VALUE))
+                        );
+                        layout.setVerticalGroup(
+                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(11, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(112, 112, 112)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblMensualiteString)
+                                            .addComponent(lblMensualite, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblTotalDette, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblTotalDettesString)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnDeleteRow)
+                                .addGap(56, 56, 56)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblMontant)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(btnAjouterFacture)
+                                            .addComponent(btnMenuPrincipal))
+                                        .addGap(39, 39, 39))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblCreancier)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(creancierField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblDescription)
+                                        .addGap(2, 2, 2)
+                                        .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblDateLimite)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(lblDD)
+                                                    .addComponent(lblMM)
+                                                    .addComponent(lblYY)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(rBtnFactureMensuelle)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(rBtnFactureUnique)))
+                                        .addGap(119, 119, 119))))
+                        );
+
+                        pack();
+                        setLocationRelativeTo(null);
+                    }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         FenAppUI fenAppUi = new FenAppUI();
@@ -142,13 +362,94 @@ public class FenBills extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
+    private void creancierFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creancierFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_creancierFieldActionPerformed
+
+    private void rBtnFactureUniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnFactureUniqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBtnFactureUniqueActionPerformed
+
+    private void btnAjouterFactureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterFactureActionPerformed
+        String date = "";
+        double montant = 0;
+        if (rBtnFactureUnique.isSelected()) {
+            if (FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
+                date = ddField.getText() + " " + mmField.getText() + " " + yyField.getText();
+            } else{
+                JOptionPane.showMessageDialog(rootPane, "Invalid date. Are you sure this date exists in the calendar ?", "Invalid date", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (rBtnFactureMensuelle.isSelected()){
+            if (FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
+                date = Facture.formatDateFactureMensuelle(ddField.getText());
+            }
+        } else if (!rBtnFactureMensuelle.isSelected() && !rBtnFactureUnique.isSelected()){
+            JOptionPane.showMessageDialog(rootPane, "Please select a bill type.", "Incorrect bill type", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            montant = Double.parseDouble(montantField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "The amount can't contains letters.", "Invalid amount", JOptionPane.ERROR_MESSAGE);
+        }
+        if (date != ""){
+            Facture facture = new Facture(creancierField.getText(),
+                                    descriptionField.getText(), date,
+                                    Double.parseDouble(montantField.getText()));
+            FileManip.ecrireFactureFichier(UserSession.client, facture);
+            FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
+            factureTable.setModel(model);
+            actualiserLabels();
+        }
+    }//GEN-LAST:event_btnAjouterFactureActionPerformed
+
+    private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
+        FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
+        FactureTableModel newModel = new FactureTableModel(FileManip.getNewListeFactureAfterDeletion(UserSession.client, model.getRow(factureTable.getSelectedRow())).getListeFacture());
+        newModel.fireTableRowsDeleted(factureTable.getSelectedRow(), factureTable.getSelectedRow());
+        factureTable.setModel(newModel);
+        
+        
+    }//GEN-LAST:event_btnDeleteRowActionPerformed
+    
+    public void actualiserLabels(){
+        ListeFacture lf = FileManip.lireFichierAjouterFacture(UserSession.client);
+        lblMensualite.setText(String.valueOf(lf.calculerSommeFactureMensuelle()));
+        lblTotalDette.setText(String.valueOf(lf.calculerSommeFactureUnique()));
+        creancierField.setText(""); descriptionField.setText("");
+        ddField.setText(""); mmField.setText(""); yyField.setText("");
+        montantField.setText("");
+    }
+   
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAjouterFacture;
+    private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnMenuPrincipal;
+    private javax.swing.JTextField creancierField;
+    private javax.swing.JTextField ddField;
+    private javax.swing.JTextField descriptionField;
+    private javax.swing.JTable factureTable;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCreancier;
+    private javax.swing.JLabel lblDD;
+    private javax.swing.JLabel lblDateLimite;
+    private javax.swing.JLabel lblDescription;
+    private javax.swing.JLabel lblMM;
+    private javax.swing.JLabel lblMensualite;
+    private javax.swing.JLabel lblMensualiteString;
+    private javax.swing.JLabel lblMontant;
+    private javax.swing.JLabel lblTotalDette;
+    private javax.swing.JLabel lblTotalDettesString;
+    private javax.swing.JLabel lblYY;
+    private javax.swing.JTextField mmField;
+    private javax.swing.JTextField montantField;
+    private javax.swing.JRadioButton rBtnFactureMensuelle;
+    private javax.swing.JRadioButton rBtnFactureUnique;
+    private javax.swing.ButtonGroup radioBtnGroup;
+    private javax.swing.JTextField yyField;
     // End of variables declaration//GEN-END:variables
+
 }

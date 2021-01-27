@@ -29,6 +29,12 @@ public class FormValidation {
         }
     }
     
+    /**
+     *
+     * @param user
+     * @param password
+     * @return
+     */
     public static boolean verifierSaisie_REGISTER(String user, char [] password){
         if ( (user == null) || ( password == null) ){
             return false;
@@ -42,7 +48,7 @@ public class FormValidation {
      * @param pass
      * @return
      */
-    public static boolean isValid(String pass){
+    public static boolean passIsValid(String pass){
         // Maj : 65 to 90 (incl)
         // Digit : 48 à 57 (incl)
         // symbol : 32 a 47
@@ -73,10 +79,68 @@ public class FormValidation {
         }
     }
     
+    /**
+     * For Register form.
+     * @param name
+     * @param user
+     * @param pass
+     * @return
+     */
     public static boolean requiredFieldsFilled(JTextField name, JTextField user, JTextField pass){
         if (name.getText().isEmpty() || user.getText().isEmpty() || pass.getText().isEmpty()){
             return false;
         }
         return true;
+    }
+    
+    public static boolean factureUniqueFieldsFilled(JTextField creancier, JTextField description,
+                                           JTextField dd, JTextField mm, JTextField yy,
+                                           JTextField montant){
+        if (creancier.getText().length() < 1 || description.getText().length() < 1
+                || dd.getText().length() < 1 || mm.getText().length() < 1
+                || yy.getText().length() < 1 || montant.getText().length() < 1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean factureMensuelleFieldsFilled(JTextField creancier, JTextField description,
+                                           JTextField dd, JTextField montant){
+        if (creancier.getText().length() < 1 || description.getText().length() < 1
+                || dd.getText().length() < 1 || montant.getText().length() < 1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public static boolean checkDateValidityFacture(JTextField dd, JTextField mm, JTextField yy){
+        final int DAY_LIMIT = 31;
+        final int MM_LIMIT = 12;
+        final int YY_MINIMUM = 21;
+        char[] date = (dd.getText() + mm.getText() + yy.getText()).toCharArray();
+        boolean dateOK = true;
+        for (int c : date) {
+            if (c > 57 || c < 48){
+                dateOK = false;
+            }
+        }
+        int day =0; int month = 0; int year = 0;
+        try{
+            day = Integer.parseInt(dd.getText());
+            month = Integer.parseInt(mm.getText());
+            year = Integer.parseInt(yy.getText());
+        } catch (NumberFormatException e){
+            System.out.println(e.getMessage());
+        }
+        if (day > DAY_LIMIT || day < 1){
+            dateOK = false;
+        } else if (month > MM_LIMIT || month < 1){
+            dateOK = false;
+        } else if (year < YY_MINIMUM){
+            dateOK = false;
+        }
+        return dateOK;
     }
 }
