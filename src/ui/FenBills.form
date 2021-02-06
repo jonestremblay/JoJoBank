@@ -4,6 +4,27 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="radioBtnGroup">
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable1">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="4" rowCount="4">
+                <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -271,7 +292,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBtnFactureUniqueActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xd;&#xa;new ActionListener(){&#xd;&#xa;    public void actionPerformed(ActionEvent ie){&#xd;&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xd;&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xd;&#xa;    }&#xd;&#xa;});&#xd;&#xa;rBtnFactureUnique.addActionListener(&#xd;&#xa;new ActionListener(){&#xd;&#xa;    public void actionPerformed(ActionEvent ie){&#xd;&#xa;        ddField.setEnabled(true); ddField.setText(&quot;&quot;);&#xd;&#xa;        mmField.setEnabled(true); mmField.setText(&quot;&quot;);&#xd;&#xa;        yyField.setEnabled(true); yyField.setText(&quot;&quot;);&#xd;&#xa;    }&#xd;&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xa;    }&#xa;});&#xa;rBtnFactureUnique.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        ddField.setEnabled(true); &#xa;        mmField.setEnabled(true); &#xa;        yyField.setEnabled(true);&#xa;    }&#xa;});"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rBtnFactureMensuelle">
@@ -282,7 +303,7 @@
         <Property name="text" type="java.lang.String" value="Facture mensuelle"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xd;&#xa;new ActionListener(){&#xd;&#xa;    public void actionPerformed(ActionEvent ie){&#xd;&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xd;&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xd;&#xa;    }&#xd;&#xa;});&#xd;&#xa;rBtnFactureUnique.addActionListener(&#xd;&#xa;new ActionListener(){&#xd;&#xa;    public void actionPerformed(ActionEvent ie){&#xd;&#xa;        ddField.setEnabled(true); ddField.setText(&quot;&quot;);&#xd;&#xa;        mmField.setEnabled(true); mmField.setText(&quot;&quot;);&#xd;&#xa;        yyField.setEnabled(true); yyField.setText(&quot;&quot;);&#xd;&#xa;    }&#xd;&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xa;    }&#xa;});&#xa;rBtnFactureUnique.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        ddField.setEnabled(true); &#xa;        mmField.setEnabled(true); &#xa;        yyField.setEnabled(true); &#xa;    }&#xa;});"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDD">
@@ -337,7 +358,7 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="factureTable">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());&#xa;factureTable.setModel(model);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="FactureTableModel model = new FactureTableModel(onLoadListeFacture.getListeFacture());&#xa;factureTable.setModel(model);"/>
           </AuxValues>
         </Component>
       </SubComponents>

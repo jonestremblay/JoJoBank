@@ -9,24 +9,17 @@ import java.util.ArrayList;
 import modele.Client;
 import modele.Facture;
 import modele.ListeFacture;
+import modele.ListeTransaction;
 
 /**
  *
  * @author Jones
  */
-public class UserSession {
+public abstract class UserSession {
     public static Client client = new Client();
+    public static int transactionsCount;
 //    public static ArrayList<Facture> listeFactures = new ArrayList<>();
-//
-//    public UserSession(){
-//        
-//    }
-//    
-//    public UserSession(Client client){
-//        this.client = client;
-//        this.listeFactures = new ArrayList<Facture>();
-//
-//    }
+
    
  
     

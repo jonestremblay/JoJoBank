@@ -8,12 +8,14 @@ package modele;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import ui.FenBills;
 
 /**
@@ -88,15 +90,65 @@ public class Facture {
 //        return df.format(dateLimite);
 //    }
     
-    public static Date formatDateFactureUnique(String dateString){
-        DateFormat df = new SimpleDateFormat("dd mm yy");
-        Date date = new Date();
-        try {
-            date = df.parse(dateString);
-        } catch (ParseException ex) {
-            Logger.getLogger(FenBills.class.getName()).log(Level.SEVERE, null, ex);
+    public static String formatDateFactureUnique(String dateString){
+       
+        String[] dateData = dateString.split(" ");
+        LocalDate date = null;
+        try{
+        date = LocalDate.of(Integer.parseInt("20" + dateData[2]), Integer.parseInt(dateData[1]), Integer.parseInt(dateData[0]));
+        } catch(DateTimeException dte){
+            JOptionPane.showMessageDialog(null, "Invalid date. Are you sure this date exists in the calendar ?", dte.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-        return date;
+        //df.format(date);
+        System.out.println(date);
+        System.out.println(date.toString());
+        
+        String[] resultDate = date.toString().split("-");
+        String mois;
+        switch(Integer.parseInt(resultDate[1])){
+            case 1:
+                mois = "Janvier";
+                break;
+            case 2:
+                mois = "Février";
+                break;
+            case 3:
+                mois = "Mars";
+                break;
+            case 4:
+                mois = "Avril";
+                break;
+            case 5:
+                mois = "Mai";
+                break;
+            case 6:
+                mois = "Juin";
+                break;
+            case 7:
+                mois = "Juillet";
+                break;
+            case 8:
+                mois = "Août";
+                break;
+            case 9:
+                mois = "Septembre";
+                break;
+            case 10:
+                mois = "Octobre";
+                break;
+            case 11:
+                mois = "Novembre";
+                break;
+            case 12:
+                mois = "Décembre";
+                break;
+            default:
+                mois = "???";
+                break;
+        }
+        String formattedDate = resultDate[2] + " " + mois + " " + resultDate[0];
+        System.out.println(formattedDate);
+        return formattedDate;
     }
     
    

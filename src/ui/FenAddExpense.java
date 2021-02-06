@@ -5,12 +5,27 @@
  */
 package ui;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import modele.Client;
+import modele.ListeClient;
+import modele.Transaction;
+import utils.FileManip;
+import utils.FormValidation;
+import utils.UserSession;
+
 /**
  *
  * @author Jones
  */
 public class FenAddExpense extends javax.swing.JFrame {
-
+    FenExpenses fenExpenses = new FenExpenses();
+    
     /**
      * Creates new form FenAddExpanse
      */
@@ -28,6 +43,31 @@ public class FenAddExpense extends javax.swing.JFrame {
     private void initComponents() {
 
         btnMenuPrincipal = new javax.swing.JButton();
+        btnSeeExpenses = new javax.swing.JButton();
+        lblDate = new javax.swing.JLabel();
+        lblCategorie = new javax.swing.JLabel();
+        lblCommerce = new javax.swing.JLabel();
+        lblMontant = new javax.swing.JLabel();
+        lblShareWith = new javax.swing.JLabel();
+        lblNotes = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        notesTextArea = new javax.swing.JTextArea();
+        montantField = new javax.swing.JTextField();
+        commerceField = new javax.swing.JTextField();
+        categorieField = new javax.swing.JTextField();
+        lblDD = new javax.swing.JLabel();
+        lblMM = new javax.swing.JLabel();
+        lblYY = new javax.swing.JLabel();
+        ddField = new javax.swing.JTextField();
+        mmField = new javax.swing.JTextField();
+        yyField = new javax.swing.JTextField();
+        String[] usersArray = FileManip.getAllUsernamesFromListeClient().toArray(new String[]{});
+        shareWithComboBox = new javax.swing.JComboBox<>();
+        btnAjouter = new javax.swing.JButton();
+        lblLastBillAdded = new javax.swing.JLabel();
+        lblLastBillCAndC = new javax.swing.JLabel();
+        lblLastBillDate = new javax.swing.JLabel();
+        lblLastBillMontant = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add an expense");
@@ -39,21 +79,182 @@ public class FenAddExpense extends javax.swing.JFrame {
             }
         });
 
+        btnSeeExpenses.setText("Voir liste de transactions");
+        btnSeeExpenses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeeExpensesActionPerformed(evt);
+            }
+        });
+
+        lblDate.setText("Date");
+
+        lblCategorie.setText("Catégorie");
+
+        lblCommerce.setText("Commerce");
+
+        lblMontant.setText("Montant");
+
+        lblShareWith.setText("ShareWith");
+
+        lblNotes.setText("Notes");
+
+        notesTextArea.setColumns(20);
+        notesTextArea.setRows(5);
+        jScrollPane1.setViewportView(notesTextArea);
+
+        lblDD.setText("DD");
+
+        lblMM.setText("MM");
+
+        lblYY.setText("YY");
+
+        int currYear = Calendar.getInstance().get(Calendar.YEAR);
+        yyField.setText(String.valueOf(currYear).substring(2));
+        yyField.setEditable(false);
+
+        shareWithComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(usersArray));
+        shareWithComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shareWithComboBoxActionPerformed(evt);
+            }
+        });
+
+        btnAjouter.setText("Ajouter");
+        btnAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjouterActionPerformed(evt);
+            }
+        });
+
+        lblLastBillAdded.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblLastBillAdded.setText("Dernière facture ajoutée");
+
+        lblLastBillCAndC.setText("");
+        lblLastBillCAndC.setText(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getCommerce()
+            + " | " + fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getCategorie());
+
+        lblLastBillDate.setText("");
+        lblLastBillDate.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getDate()));
+
+        lblLastBillMontant.setText("");
+        lblLastBillMontant.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getMontant()) + " $");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnMenuPrincipal)
-                .addContainerGap(569, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNotes)
+                            .addComponent(lblShareWith)
+                            .addComponent(lblMontant)
+                            .addComponent(lblCommerce)
+                            .addComponent(lblCategorie)
+                            .addComponent(lblDate)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnMenuPrincipal)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSeeExpenses)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(lblDD)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(lblMM)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(lblYY))))
+                                    .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(71, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(montantField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                    .addComponent(commerceField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(categorieField, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblLastBillDate)
+                                    .addComponent(lblLastBillAdded)
+                                    .addComponent(lblLastBillCAndC)
+                                    .addComponent(lblLastBillMontant))
+                                .addGap(24, 24, 24))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(244, 244, 244)
+                .addComponent(btnAjouter)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(453, Short.MAX_VALUE)
-                .addComponent(btnMenuPrincipal)
-                .addGap(15, 15, 15))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDate))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDD)
+                    .addComponent(lblMM)
+                    .addComponent(lblYY))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(categorieField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCategorie)
+                    .addComponent(lblLastBillAdded))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLastBillDate)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(commerceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCommerce)
+                    .addComponent(lblLastBillCAndC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLastBillMontant)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMontant))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblShareWith))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNotes))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAjouter)
+                        .addGap(65, 88, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSeeExpenses)
+                            .addComponent(btnMenuPrincipal))
+                        .addContainerGap())))
         );
 
         pack();
@@ -66,8 +267,100 @@ public class FenAddExpense extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
+    private void shareWithComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shareWithComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_shareWithComboBoxActionPerformed
+
+    private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.FRENCH);
+        String strDate = ""; String commerce = ""; String categorie = "";
+        double montant = 0; String notes = "";
+        LocalDate date = null;
+        String user = shareWithComboBox.getSelectedItem().toString();
+        Client shareWith = ListeClient.getClientWithUsername(user);
+        
+        if(FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
+            date = FormValidation.getLocalDateFromString(ddField, mmField, yyField);
+            strDate = date.format(formatter);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Invalid date. Are you sure this date exists in the calendar ?", "Invalid date", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        try {
+            montant = Double.parseDouble(montantField.getText());
+            commerce = commerceField.getText();
+            categorie = categorieField.getText();
+            notes = notesTextArea.getText();
+            
+            if (!strDate.equals("")){
+                // Créer la transaction
+                Transaction transaction = new Transaction(
+                date, categorie, commerce, notes, montant, UserSession.transactionsCount + 1, shareWith);
+                System.out.println(transaction.toString());
+                // Écrire la transaction dans le fichier
+                FileManip.ecrireTransactionFichier(UserSession.client, transaction);
+                resetTextFields();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "The amount can't contains letters.", "Invalid amount", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAjouterActionPerformed
+
+    private void btnSeeExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeExpensesActionPerformed
+        FenExpenses fenExpenses = new FenExpenses();
+        fenExpenses.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSeeExpensesActionPerformed
+    
+   
+    
+    private void resetTextFields(){
+        ddField.setText(""); mmField.setText(""); yyField.setText("");
+        commerceField.setText(""); categorieField.setText("");
+        montantField.setText(""); notesTextArea.setText("");
+        shareWithComboBox.setSelectedIndex(0);
+        refreshLastBillEntered();
+    }
+    
+    private void refreshLastBillEntered(){
+        FenExpenses fenExpenses = new FenExpenses();
+        fenExpenses.setVisible(false);
+        //fenExpenses.refreshExpenseTable();
+        int lastIndex = fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1;
+        lblLastBillDate.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(lastIndex).getDate())); 
+        lblLastBillCAndC.setText(fenExpenses.onLoadListeTransaction.getListeTransaction().get(lastIndex).getCommerce()
+                                + " | " + fenExpenses.onLoadListeTransaction.getListeTransaction().get(lastIndex).getCategorie());
+        lblLastBillMontant.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(lastIndex).getMontant()) + " $");
+    }
+        
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAjouter;
     private javax.swing.JButton btnMenuPrincipal;
+    private javax.swing.JButton btnSeeExpenses;
+    private javax.swing.JTextField categorieField;
+    private javax.swing.JTextField commerceField;
+    private javax.swing.JTextField ddField;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCategorie;
+    private javax.swing.JLabel lblCommerce;
+    private javax.swing.JLabel lblDD;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblLastBillAdded;
+    private javax.swing.JLabel lblLastBillCAndC;
+    private javax.swing.JLabel lblLastBillDate;
+    private javax.swing.JLabel lblLastBillMontant;
+    private javax.swing.JLabel lblMM;
+    private javax.swing.JLabel lblMontant;
+    private javax.swing.JLabel lblNotes;
+    private javax.swing.JLabel lblShareWith;
+    private javax.swing.JLabel lblYY;
+    private javax.swing.JTextField mmField;
+    private javax.swing.JTextField montantField;
+    private javax.swing.JTextArea notesTextArea;
+    private javax.swing.JComboBox<String> shareWithComboBox;
+    private javax.swing.JTextField yyField;
     // End of variables declaration//GEN-END:variables
 }

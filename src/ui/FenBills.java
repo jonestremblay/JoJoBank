@@ -40,7 +40,7 @@ import utils.UserSession;
  * @author Jones
  */
 public class FenBills extends javax.swing.JFrame {
-
+    ListeFacture onLoadListeFacture = FileManip.lireFichierAjouterFacture(UserSession.client);
     /**
      * Creates new form FenBills
      */
@@ -58,6 +58,8 @@ public class FenBills extends javax.swing.JFrame {
     private void initComponents() {
 
         radioBtnGroup = new javax.swing.ButtonGroup();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         btnMenuPrincipal = new javax.swing.JButton();
         jPanel2 = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -91,11 +93,26 @@ public class FenBills extends javax.swing.JFrame {
         btnAjouterFacture = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         factureTable = new javax.swing.JTable();
+        FactureTableModel model = new FactureTableModel(onLoadListeFacture.getListeFacture());
+        factureTable.setModel(model);
         lblMensualiteString = new javax.swing.JLabel();
         lblMensualite = new javax.swing.JLabel();
         lblTotalDettesString = new javax.swing.JLabel();
         lblTotalDette = new javax.swing.JLabel();
         btnDeleteRow = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Your bills");
@@ -147,9 +164,9 @@ public class FenBills extends javax.swing.JFrame {
             rBtnFactureUnique.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent ie){
-                        ddField.setEnabled(true); ddField.setText("");
-                        mmField.setEnabled(true); mmField.setText("");
-                        yyField.setEnabled(true); yyField.setText("");
+                        ddField.setEnabled(true);
+                        mmField.setEnabled(true);
+                        yyField.setEnabled(true);
                     }
                 });
                 rBtnFactureUnique.addActionListener(new java.awt.event.ActionListener() {
@@ -170,9 +187,9 @@ public class FenBills extends javax.swing.JFrame {
                     rBtnFactureUnique.addActionListener(
                         new ActionListener(){
                             public void actionPerformed(ActionEvent ie){
-                                ddField.setEnabled(true); ddField.setText("");
-                                mmField.setEnabled(true); mmField.setText("");
-                                yyField.setEnabled(true); yyField.setText("");
+                                ddField.setEnabled(true);
+                                mmField.setEnabled(true);
+                                yyField.setEnabled(true);
                             }
                         });
 
@@ -197,8 +214,6 @@ public class FenBills extends javax.swing.JFrame {
                             }
                         });
 
-                        FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
-                        factureTable.setModel(model);
                         jScrollPane2.setViewportView(factureTable);
 
                         lblMensualiteString.setText("Mensualité totale :");
@@ -374,15 +389,17 @@ public class FenBills extends javax.swing.JFrame {
         String date = "";
         double montant = 0;
         if (rBtnFactureUnique.isSelected()) {
+            
             if (FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
-                date = ddField.getText() + " " + mmField.getText() + " " + yyField.getText();
+                date = Facture.formatDateFactureUnique(ddField.getText() + " " + mmField.getText() + " " + yyField.getText());
             } else{
                 JOptionPane.showMessageDialog(rootPane, "Invalid date. Are you sure this date exists in the calendar ?", "Invalid date", JOptionPane.ERROR_MESSAGE);
             }
         } else if (rBtnFactureMensuelle.isSelected()){
+
             if (FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
                 date = Facture.formatDateFactureMensuelle(ddField.getText());
-            }
+            } 
         } else if (!rBtnFactureMensuelle.isSelected() && !rBtnFactureUnique.isSelected()){
             JOptionPane.showMessageDialog(rootPane, "Please select a bill type.", "Incorrect bill type", JOptionPane.ERROR_MESSAGE);
         }
@@ -391,24 +408,28 @@ public class FenBills extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, "The amount can't contains letters.", "Invalid amount", JOptionPane.ERROR_MESSAGE);
         }
-        if (date != ""){
+        if (!date.equals("")){
             Facture facture = new Facture(creancierField.getText(),
                                     descriptionField.getText(), date,
                                     Double.parseDouble(montantField.getText()));
             FileManip.ecrireFactureFichier(UserSession.client, facture);
-            FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
+            onLoadListeFacture.setListeFacture(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
+            FactureTableModel model = new FactureTableModel(onLoadListeFacture.getListeFacture());
             factureTable.setModel(model);
             actualiserLabels();
         }
     }//GEN-LAST:event_btnAjouterFactureActionPerformed
 
     private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
+        
         FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
-        FactureTableModel newModel = new FactureTableModel(FileManip.getNewListeFactureAfterDeletion(UserSession.client, model.getRow(factureTable.getSelectedRow())).getListeFacture());
-        newModel.fireTableRowsDeleted(factureTable.getSelectedRow(), factureTable.getSelectedRow());
+        int rowIndexSelected = factureTable.getSelectedRow();
+        ListeFacture lf = FileManip.getNewListeFactureAfterDeletion(UserSession.client, model.getRow(rowIndexSelected));
+        FileManip.ecrireListeFactureDansFichier(UserSession.client, lf);
+        FactureTableModel newModel = new FactureTableModel(lf.getListeFacture());
+        //newModel.fireTableRowsDeleted(rowIndexSelected, rowIndexSelected);
         factureTable.setModel(newModel);
-        
-        
+        actualiserLabels();
     }//GEN-LAST:event_btnDeleteRowActionPerformed
     
     public void actualiserLabels(){
@@ -432,7 +453,9 @@ public class FenBills extends javax.swing.JFrame {
     private javax.swing.JTable factureTable;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCreancier;
     private javax.swing.JLabel lblDD;
     private javax.swing.JLabel lblDateLimite;

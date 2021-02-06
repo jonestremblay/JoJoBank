@@ -5,6 +5,8 @@
  */
 package utils;
 
+import java.time.LocalDate;
+import java.time.Month;
 import javax.swing.JTextField;
 import ui.FenAppUI;
 
@@ -119,28 +121,57 @@ public class FormValidation {
         final int DAY_LIMIT = 31;
         final int MM_LIMIT = 12;
         final int YY_MINIMUM = 21;
-        char[] date = (dd.getText() + mm.getText() + yy.getText()).toCharArray();
+        char[] date;
+        if (mm.getText().isEmpty() && yy.getText().isEmpty()){
+            date = dd.getText().toCharArray();
+        } else {
+            date = (dd.getText() + mm.getText() + yy.getText()).toCharArray();
+        }
+        
         boolean dateOK = true;
         for (int c : date) {
             if (c > 57 || c < 48){
                 dateOK = false;
             }
         }
+        
         int day =0; int month = 0; int year = 0;
-        try{
-            day = Integer.parseInt(dd.getText());
-            month = Integer.parseInt(mm.getText());
-            year = Integer.parseInt(yy.getText());
-        } catch (NumberFormatException e){
-            System.out.println(e.getMessage());
-        }
-        if (day > DAY_LIMIT || day < 1){
-            dateOK = false;
-        } else if (month > MM_LIMIT || month < 1){
-            dateOK = false;
-        } else if (year < YY_MINIMUM){
-            dateOK = false;
+        if (mm.getText().isEmpty() && yy.getText().isEmpty()){
+            try{
+                day = Integer.parseInt(dd.getText());
+            } catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
+            if (day > DAY_LIMIT || day < 1){
+                dateOK = false;}
+        } else {
+            try{
+                day = Integer.parseInt(dd.getText());
+                month = Integer.parseInt(mm.getText());
+                year = Integer.parseInt(yy.getText());
+            } catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
+            if (day > DAY_LIMIT || day < 1){
+                dateOK = false;
+            } else if (month > MM_LIMIT || month < 1){
+                dateOK = false;
+            } else if (year < YY_MINIMUM){
+                dateOK = false;
+            }
         }
         return dateOK;
+    }
+    
+    /* 
+    Called after verification only. Return in the format : yyyy-mm-dd
+    */
+    public static LocalDate getLocalDateFromString(JTextField dd, JTextField mm, JTextField yy){
+        
+        int day = Integer.parseInt(dd.getText());
+        int month = Integer.parseInt(mm.getText());
+        int year = Integer.parseInt("20" + yy.getText());
+        
+        return LocalDate.of(year, month, day);
     }
 }

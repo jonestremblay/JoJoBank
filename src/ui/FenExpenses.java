@@ -5,17 +5,28 @@
  */
 package ui;
 
+import modele.ExpenseTableModel;
+import modele.FactureTableModel;
+import modele.ListeFacture;
+import modele.ListeTransaction;
+import utils.FileManip;
+import utils.UserSession;
+
 /**
  *
  * @author Jones
  */
 public class FenExpenses extends javax.swing.JFrame {
+    public  ListeTransaction onLoadListeTransaction = FileManip.lireFichierTransaction(UserSession.client);
+
+    
 
     /**
      * Creates new form FenTable
      */
     public FenExpenses() {
         initComponents();
+        UserSession.transactionsCount = expensesTable.getRowCount();
     }
 
     /**
@@ -28,71 +39,19 @@ public class FenExpenses extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        expensesTable = new javax.swing.JTable();
         btnMenuPrincipal = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitre = new javax.swing.JLabel();
         btnAddExpense = new javax.swing.JButton();
+        btnDeleteRow = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("See expenses");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Date", "Catégorie", "Commerce", "Textes/Notes", "Montant", "NoFacture", "usersToShareWith"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Date");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Catégorie");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Commerce");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Textes/Notes");
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("Montant");
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("NoFacture");
-            jTable1.getColumnModel().getColumn(6).setHeaderValue("usersToShareWith");
-        }
+        onLoadListeTransaction = FileManip.lireFichierTransaction(UserSession.client);
+        ExpenseTableModel model = new ExpenseTableModel(onLoadListeTransaction.getListeTransaction());
+        expensesTable.setModel(model);
+        jScrollPane1.setViewportView(expensesTable);
 
         btnMenuPrincipal.setText("Menu principal");
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -101,39 +60,58 @@ public class FenExpenses extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        jLabel1.setText("My expenses");
+        lblTitre.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        lblTitre.setText("My expenses");
 
         btnAddExpense.setText("Add an expanse");
+        btnAddExpense.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddExpenseActionPerformed(evt);
+            }
+        });
+
+        btnDeleteRow.setText("Delete");
+        btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteRowActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(btnMenuPrincipal)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTitre)
                         .addGap(265, 265, 265))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAddExpense)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btnMenuPrincipal))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addComponent(btnDeleteRow)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel1)
+                .addComponent(lblTitre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDeleteRow)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMenuPrincipal)
                     .addComponent(btnAddExpense))
@@ -150,12 +128,32 @@ public class FenExpenses extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
+    private void btnAddExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddExpenseActionPerformed
+        FenAddExpense fenAddExpense = new FenAddExpense();
+        fenAddExpense.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAddExpenseActionPerformed
+
+    private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
+        ExpenseTableModel model = new ExpenseTableModel(FileManip.lireFichierTransaction(UserSession.client).getListeTransaction());
+        int rowIndexSelected = expensesTable.getSelectedRow();
+        ListeTransaction lt = FileManip.getNewListeTransactionAfterDeletion(UserSession.client, model.getRow(rowIndexSelected));
+        FileManip.ecrireListeTransactionFichier(UserSession.client, lt);
+        ExpenseTableModel newModel = new ExpenseTableModel(lt.getListeTransaction());
+        //newModel.fireTableRowsDeleted(rowIndexSelected, rowIndexSelected);
+        expensesTable.setModel(newModel);
+    }//GEN-LAST:event_btnDeleteRowActionPerformed
+    
+    public void refreshExpenseTable(){
+        onLoadListeTransaction = FileManip.lireFichierTransaction(UserSession.client);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddExpense;
+    private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnMenuPrincipal;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTable expensesTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTitre;
     // End of variables declaration//GEN-END:variables
 }

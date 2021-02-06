@@ -5,6 +5,7 @@
  */
 package modele;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -13,32 +14,23 @@ import java.util.TreeSet;
  * @author Jones
  */
 public class ListeTransaction {
-    private String user;
-    private static Set listeTransaction = new TreeSet();
+    private static ArrayList<Transaction> listeTransaction;
 
-    public ListeTransaction(String user) {
-        this.user = user;
+    public ListeTransaction() {
+        this.listeTransaction = new ArrayList<Transaction>();
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public Set getListeTransaction() {
+    public ArrayList<Transaction> getListeTransaction() {
         return listeTransaction;
     }
 
-    public void setListeTransaction(Set listeTransaction) {
+    public void setListeTransaction(ArrayList<Transaction> listeTransaction) {
         this.listeTransaction = listeTransaction;
     }
 
     @Override
     public String toString() {
-        return "ListeTransaction{" + "user=" + user + " liste: " + listeTransaction.toString() +  '}';
+        return "ListeTransaction{" + " liste: " + listeTransaction.toString() +  '}';
     }
     
     

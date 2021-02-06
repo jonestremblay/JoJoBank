@@ -193,7 +193,7 @@ public class FenConnection extends javax.swing.JFrame {
         
         if(FormValidation.verifierSaisie_LOGIN(userField.getText(), passField.getPassword())){
             String pass = String.valueOf(passField.getPassword());
-            if(FileManip.chercherClientDansSet(userField.getText(), pass)){
+            if(FileManip.chercherClientDansListe(userField.getText(), pass)){
                 UserSession.client = FileManip.getClientFromFile(userField.getText(), pass);
                 JOptionPane.showMessageDialog(rootPane, "NICE SHIT BRO WELCOME",
                     "Bienvenue !", JOptionPane.PLAIN_MESSAGE);

@@ -58,6 +58,20 @@ public abstract class ListeClient {
         return false;
     }
     
+    public static Client getClientWithUsername(String username){
+        ArrayList<Client> listeClient = new ArrayList<Client>();
+        Client client = null;
+        for (Object c: ListeClient.listeClient){
+            listeClient.add((Client)c);
+        }
+        for (Client c: listeClient){
+            if (c.getUsername().equals(username)){
+                client = c;
+            } 
+        }
+        return client;
+    }
+    
     @Override
     public String toString() {
         return "ListeClient{" + '}';

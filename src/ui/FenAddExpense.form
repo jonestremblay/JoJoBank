@@ -25,18 +25,151 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="btnMenuPrincipal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="569" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblNotes" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblShareWith" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMontant" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCommerce" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCategorie" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDate" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnMenuPrincipal" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnSeeExpenses" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="ddField" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                              <Component id="lblDD" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="mmField" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                              <Component id="lblMM" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="yyField" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                              <Component id="lblYY" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Component id="shareWithComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="71" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="montantField" alignment="0" pref="74" max="32767" attributes="0"/>
+                                  <Component id="commerceField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="categorieField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblLastBillDate" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLastBillAdded" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLastBillCAndC" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLastBillMontant" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+              <Component id="btnAjouter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="453" max="32767" attributes="0"/>
-              <Component id="btnMenuPrincipal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ddField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mmField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="yyField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMM" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblYY" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="categorieField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCategorie" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLastBillAdded" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblLastBillDate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="commerceField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCommerce" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLastBillCAndC" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblLastBillMontant" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="montantField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMontant" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="shareWithComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblShareWith" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="lblNotes" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnAjouter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="65" pref="88" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnSeeExpenses" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnMenuPrincipal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,6 +182,150 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSeeExpenses">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Voir liste de transactions"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeeExpensesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCategorie">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cat&#xe9;gorie"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCommerce">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Commerce"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMontant">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Montant"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblShareWith">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ShareWith"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNotes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Notes"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="notesTextArea">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="montantField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="commerceField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="categorieField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDD">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMM">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MM"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblYY">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YY"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ddField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="mmField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="yyField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="int currYear = Calendar.getInstance().get(Calendar.YEAR);&#xa;yyField.setText(String.valueOf(currYear).substring(2));&#xa;yyField.setEditable(false);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="shareWithComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(usersArray)" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shareWithComboBoxActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="String[] usersArray = FileManip.getAllUsernamesFromListeClient().toArray(new String[]{});"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAjouter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ajouter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLastBillAdded">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Derni&#xe8;re facture ajout&#xe9;e"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLastBillCAndC">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;&quot;" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblLastBillCAndC.setText(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getCommerce()&#xa;                                + &quot; | &quot; + fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getCategorie());"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLastBillDate">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;&quot;" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JLabel()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblLastBillDate.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getDate()));"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLastBillMontant">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;&quot;" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblLastBillMontant.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getMontant()) + &quot; $&quot;);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
