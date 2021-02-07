@@ -1,10 +1,16 @@
 
 package ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
+import modele.Client;
+import modele.ListeTransaction;
+import utils.FileManip;
+import utils.FormValidation;
+import utils.UserSession;
 
 
 public class FenOwing extends javax.swing.JFrame {
@@ -14,6 +20,8 @@ public class FenOwing extends javax.swing.JFrame {
      */
     public FenOwing() {
         initComponents();
+        initWOWFiles();
+        setLabelsWithWOWInfo();
     }
 
     /**
@@ -28,19 +36,32 @@ public class FenOwing extends javax.swing.JFrame {
         background = background =  new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
-                    FenConnection.class.getResource("/img/background.png"));
+                    FenConnection.class.getResource("/img/wowBackground.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };
         btnMenuPrincipal = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        String[] usersArray = FileManip.getAllUsernamesFromListeClient().toArray(new String[]{});
+        shareWithComboBox = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        lblClientTotalExpenses = new javax.swing.JLabel();
+        lblClientSum = new javax.swing.JLabel();
+        lblFriendTotalExpenses = new javax.swing.JLabel();
+        lblFriendSum = new javax.swing.JLabel();
+        lblResultString = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblFinalAmountDue = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnTellMe = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculation's of what you owe to who");
+        setResizable(false);
 
-        btnMenuPrincipal.setText("Menu principal");
+        btnMenuPrincipal.setBackground(new java.awt.Color(25, 23, 26));
+        btnMenuPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuPrincipal.setText("Home Menu");
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalActionPerformed(evt);
@@ -48,46 +69,138 @@ public class FenOwing extends javax.swing.JFrame {
         });
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("I want to know how much");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/andIOwesEachOther.png"))); // NOI18N
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(" and I owe each other");
+        shareWithComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        shareWithComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(usersArray));
+        shareWithComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shareWithComboBoxActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tellMeHowMuch.png"))); // NOI18N
+
+        lblClientTotalExpenses.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblClientTotalExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        lblClientTotalExpenses.setText("Total expenses you made with <itemClient>");
+
+        lblClientSum.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblClientSum.setForeground(new java.awt.Color(255, 255, 255));
+        lblClientSum.setText("xxx.xx $");
+
+        lblFriendTotalExpenses.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblFriendTotalExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        lblFriendTotalExpenses.setText("Total expenses <itemClient> made with you");
+
+        lblFriendSum.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblFriendSum.setForeground(new java.awt.Color(255, 255, 255));
+        lblFriendSum.setText("xxx.xx $");
+
+        lblResultString.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblResultString.setForeground(new java.awt.Color(255, 0, 0));
+        lblResultString.setText("<c1> owes you / You owe <c1>");
+
+        jSeparator1.setForeground(new java.awt.Color(255, 102, 196));
+
+        lblFinalAmountDue.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblFinalAmountDue.setForeground(new java.awt.Color(255, 102, 196));
+        lblFinalAmountDue.setText("x $");
+
+        jSeparator2.setForeground(new java.awt.Color(255, 102, 196));
+
+        btnTellMe.setBackground(new java.awt.Color(25, 23, 26));
+        btnTellMe.setForeground(new java.awt.Color(255, 255, 255));
+        btnTellMe.setText("Tell me");
+        btnTellMe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTellMeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(btnTellMe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFriendTotalExpenses)
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(61, 61, 61))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblResultString, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblClientTotalExpenses))
+                                .addGap(82, 82, 82)))
+                        .addGroup(backgroundLayout.createSequentialGroup()
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(btnMenuPrincipal)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(lblFriendSum)
+                        .addGap(204, 204, 204))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(lblClientSum)
+                        .addGap(207, 207, 207))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(221, 221, 221))
-            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backgroundLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(btnMenuPrincipal)
-                    .addContainerGap(581, Short.MAX_VALUE)))
+                .addGap(131, 131, 131)
+                .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFinalAmountDue)
+                .addGap(213, 213, 213))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2))
-                .addContainerGap(414, Short.MAX_VALUE))
-            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backgroundLayout.createSequentialGroup()
-                    .addContainerGap(462, Short.MAX_VALUE)
-                    .addComponent(btnMenuPrincipal)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addComponent(lblClientSum)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblClientTotalExpenses)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(lblFinalAmountDue)
+                        .addGap(45, 45, 45)
+                        .addComponent(lblResultString)
+                        .addGap(1, 1, 1))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTellMe)
+                        .addGap(37, 37, 37))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(lblFriendSum)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFriendTotalExpenses)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMenuPrincipal)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,13 +224,64 @@ public class FenOwing extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
+    private void shareWithComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shareWithComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_shareWithComboBoxActionPerformed
 
+    private void btnTellMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTellMeActionPerformed
+        initWOWFiles();
+        setLabelsWithWOWInfo();
+    }//GEN-LAST:event_btnTellMeActionPerformed
+    
+    /* 
+    * Crée le fichier WhoOwesWho avec le user selectionner dans la combobox.
+    */
+    private void initWOWFiles(){
+        String selectedClient = shareWithComboBox.getSelectedItem().toString();
+        ListeTransaction listeT = FileManip.lireTransactionPartageAvec(selectedClient, UserSession.client.getUsername());
+        FileManip.creerFichierWOW(selectedClient, listeT);
+    }
+    
+    /* 
+    * Met à jour les données résultats selon les calculs du fichier WhoOwesWho
+    */
+    private void setLabelsWithWOWInfo(){
+        String connectedUser = UserSession.client.getUsername();
+        String selectedClient = shareWithComboBox.getSelectedItem().toString();
+        double clientSum = FileManip.calculerSommeTransactionPartage(selectedClient, connectedUser);
+        double friendSum = FileManip.calculerSommeTransactionPartage(connectedUser, selectedClient);
+        
+        lblClientSum.setText(String.valueOf(clientSum) + " $");
+        lblClientTotalExpenses.setText("Total expenses you made with " + selectedClient);
+        
+        lblFriendSum.setText(String.valueOf(friendSum) + " $");
+        lblFriendTotalExpenses.setText("Total expenses " + selectedClient + " made with you");
+        
+        lblFinalAmountDue.setText(String.valueOf(Math.abs(clientSum - friendSum)) + " $");
+        lblResultString.setText(FormValidation.whoOwesWho(selectedClient, clientSum, friendSum));
+        if(lblResultString.getText().contains("You owe")){
+            lblResultString.setForeground(Color.RED);
+        } else {
+            lblResultString.setForeground(Color.GREEN);
+        }
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton btnMenuPrincipal;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnTellMe;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblClientSum;
+    private javax.swing.JLabel lblClientTotalExpenses;
+    private javax.swing.JLabel lblFinalAmountDue;
+    private javax.swing.JLabel lblFriendSum;
+    private javax.swing.JLabel lblFriendTotalExpenses;
+    private javax.swing.JLabel lblResultString;
+    private javax.swing.JComboBox<String> shareWithComboBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -180,4 +180,26 @@ public class FormValidation {
         
         return LocalDate.of(year, month, day);
     }
+    
+    /**
+     * Checks who owes who, and return the correct string.
+     * @param clientSum
+     * @param friendSum
+     * @return 'client1' owes 'client2' 
+     */
+    public static String whoOwesWho(String selectedUser, double clientSum, double friendSum){
+        String result = "";
+        
+        if (clientSum > friendSum){
+            result = selectedUser + " owes you !";
+        } else if(friendSum > clientSum){
+           result = "You owe " + selectedUser + " !";  
+        } else{ // equals
+            result = "Lucky ! You pals are already even :)";
+        }
+        
+        return result;
+    }
+    
+
 }

@@ -58,14 +58,15 @@ public class FenRegister extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblLogoBanner = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Minimum 8 characters,");
@@ -99,11 +100,16 @@ public class FenRegister extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF3.gif"))); // NOI18N
+        lblLogoBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF3.gif"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(25, 23, 36));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
+        btnLogin.setBackground(new java.awt.Color(25, 23, 36));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -111,11 +117,11 @@ public class FenRegister extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jButton1)
+                .addComponent(btnLogin)
                 .addGap(21, 21, 21)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblLogoBanner)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPassword)
@@ -137,7 +143,7 @@ public class FenRegister extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel1)
+                .addComponent(lblLogoBanner)
                 .addGap(18, 18, 18)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
@@ -161,7 +167,7 @@ public class FenRegister extends javax.swing.JFrame {
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btnLogin)
                         .addGap(16, 16, 16))))
         );
 
@@ -198,40 +204,48 @@ public class FenRegister extends javax.swing.JFrame {
                 /* Ici on crée tout de suite un fichier de transactions pour le client 
                    afin d'éviter tout problème de fonctionnalités lors de la connexion.
                    (pour les fenetre de transactions, si il n'y a pas de fichier, ça ne fonctionne pas)
+                    On crée aussi son repertoire de WhoOwesWho
                 */
                 registre.createNewFile();
+                FileManip.creerRepertoireWOW(client);
                 Transaction defaultFirstTransaction = new Transaction(LocalDate.of(2021, 01, 01),
                                             "Test", "JojoBank", "deleteME", 0, 1, client);
                 
                 FileManip.ecrireTransactionFichier(client, defaultFirstTransaction);
                 this.dispose();
             } catch (ClientExistantException ex) {
-                JOptionPane.showMessageDialog(null, client + " existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, client + " already exists.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (IOException e){
-                JOptionPane.showMessageDialog(null, "Erreur ouverture fichier", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Votre mot de passe doit contenir"
-                    + " au moins 8 caractères et contenir au moins une majuscule,"
-                    + " un chiffre et un symbole", "Mot de passe faible", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Your password must contain at least "
+                    + "8 characters and contain at least one capital letter, one "
+                    + "number and one symbol.", "Weak password", JOptionPane.ERROR_MESSAGE);
         }
         } else{
-            JOptionPane.showMessageDialog(null, "Vous devez saisir tous les champs.",
-                    "Inscription incomplète", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You must enter all fields.",
+                    "Incomplete registration", JOptionPane.ERROR_MESSAGE);
         }
         usernameField.setText(""); passwordField.setText("");
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+       FenConnection fenConnection = new FenConnection();
+       fenConnection.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnLoginActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblLogoBanner;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;

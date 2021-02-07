@@ -609,4 +609,115 @@ public class FileManip {
             }
         }
     }
+    
+    /**
+     * Crée, lors de l'inscription, le repertoire du client dans 
+     * DATA/RegistreWhoOwesWho
+     * @param : Client client
+     */
+    public static void creerRepertoireWOW(Client client){
+        String clientUsername = client.getUsername();
+        String repertoire = "DATA/registreWhoOwesWho/" + clientUsername + "/";
+        Path path = Paths.get(repertoire);
+        try {
+            Files.createDirectories(path);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Crée une liste contenant seulement les transactions partagé avec le client en param.
+     * @param : Client shareWithClient
+     * @return : ListeTransaction la liste de transaction contenant seulement 
+     */
+    public static ListeTransaction lireTransactionPartageAvec(String shareWith_Username, String otherClientUsername){
+        String repertoire = "DATA/registreTransactions";
+        Path path = Paths.get(repertoire);
+        try {
+            Files.createDirectories(path);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // 2. Read the file
+        File registre = new File(repertoire + "/" + otherClientUsername + "-transactions.txt");
+        FileReader fr = null;
+        BufferedReader br = null;
+        ListeTransaction lt = new ListeTransaction();
+        try {
+            fr = new FileReader(registre);
+            br = new BufferedReader(fr);
+            String ligne;
+            while ((ligne = br.readLine()) != null){
+                String[] tokens = ligne.split(";");
+                // Token 6 is last index of the line --> shareWithUsername
+                if (tokens[6].equals(shareWith_Username)){
+                    lt.getListeTransaction().add(convertirLigneTransaction(ligne));
+                }
+            }
+            return lt;
+        } catch (IOException e){
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (br != null){
+                try{
+                    br.close();
+                } catch (IOException e){
+                    Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+        }
+        return lt;
+    
+    }
+    
+    
+    /**
+     * Crée le fichier WhoOwesWho du client connecté avec un client en param,
+     * avec la Liste de Transaction passée en param.
+     * @param shareWithClient_Username
+     * @param listeT
+     */
+    public static void creerFichierWOW(String shareWithClient_Username, ListeTransaction listeT){
+        Client connectedClient = UserSession.client;
+        String clientUsername = connectedClient.getUsername();
+        String repertoire = "DATA/registreWhoOwesWho/" + clientUsername + "/";
+        
+        File registre = new File(repertoire + shareWithClient_Username + "-WhoOwesWho.txt");
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter(registre);
+            bw = new BufferedWriter(fw);
+            for (Transaction t : listeT.getListeTransaction()){
+                bw.write(t.convertirTransactionLigne() + "\n");
+            }
+        } catch (IOException e){
+            Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (bw != null){
+                try{
+                    bw.close();
+                } catch (IOException e){
+                    Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+        }
+        
+    }
+    
+    /**
+     * Calcule la somme des transactions qui sont partagé avec le user en param.
+     * @param shareWithClient_Username
+     * @return sommeTransaction
+     */
+    public static double calculerSommeTransactionPartage(String shareWithClient_Username, String otherClientUsername){
+        ListeTransaction listeT = FileManip.lireTransactionPartageAvec(shareWithClient_Username, otherClientUsername);
+        double sommeTransaction = 0;
+        for (Transaction t: listeT.getListeTransaction()){
+            sommeTransaction += t.getMontant();
+        }
+        return sommeTransaction;
+    }
+
 }

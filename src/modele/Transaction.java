@@ -116,40 +116,40 @@ public class Transaction {
         String mois;
         switch(Integer.parseInt(resultDate[1])){
             case 1:
-                mois = "Janv";
+                mois = "Jan.";
                 break;
             case 2:
-                mois = "Fév";
+                mois = "Feb.";
                 break;
             case 3:
-                mois = "Mars";
+                mois = "Mar.";
                 break;
             case 4:
-                mois = "Avr";
+                mois = "Apr.";
                 break;
             case 5:
-                mois = "Mai";
+                mois = "May";
                 break;
             case 6:
-                mois = "Juin";
+                mois = "June";
                 break;
             case 7:
-                mois = "Juil";
+                mois = "July";
                 break;
             case 8:
-                mois = "Août";
+                mois = "Aug.";
                 break;
             case 9:
-                mois = "Sept";
+                mois = "Sept.";
                 break;
             case 10:
-                mois = "Oct";
+                mois = "Oct.";
                 break;
             case 11:
-                mois = "Nov";
+                mois = "Nov.";
                 break;
             case 12:
-                mois = "Déc";
+                mois = "Dec.";
                 break;
             default:
                 mois = "???";

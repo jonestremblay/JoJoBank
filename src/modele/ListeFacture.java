@@ -37,7 +37,7 @@ public class ListeFacture {
     public Double calculerSommeFactureMensuelle(){
         double montant = 0;
         for(Facture f : listeFacture){
-            if(f.dateLimite.contains(" du mois")){
+            if(f.dateLimite.contains(" of the month")){
                 montant += f.montant;
             }
         }
@@ -52,7 +52,7 @@ public class ListeFacture {
     public Double calculerSommeFactureUnique(){
         double montant = 0;
         for(Facture f : listeFacture){
-            if(!f.dateLimite.contains(" du mois")){
+            if(!f.dateLimite.contains(" of the month")){
                 montant += f.montant;
             }
         }

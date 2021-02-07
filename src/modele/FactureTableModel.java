@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class FactureTableModel extends AbstractTableModel{
     
-    private String[] columnNames = {"Créancier", "Description", "Date Limite", "Montant"};
+    private String[] columnNames = {"Creditor", "Description", "Due date", "Amount"};
     private ArrayList<Facture> listeFacture;
     
     public FactureTableModel(ArrayList<Facture> listeF){

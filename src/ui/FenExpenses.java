@@ -45,13 +45,16 @@ public class FenExpenses extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("See expenses");
+        setResizable(false);
 
         onLoadListeTransaction = FileManip.lireFichierTransaction(UserSession.client);
         ExpenseTableModel model = new ExpenseTableModel(onLoadListeTransaction.getListeTransaction());
         expensesTable.setModel(model);
         jScrollPane1.setViewportView(expensesTable);
 
-        btnMenuPrincipal.setText("Menu principal");
+        btnMenuPrincipal.setBackground(new java.awt.Color(25, 23, 26));
+        btnMenuPrincipal.setForeground(new java.awt.Color(255, 102, 196));
+        btnMenuPrincipal.setText("Home Menu");
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalActionPerformed(evt);
@@ -61,6 +64,8 @@ public class FenExpenses extends javax.swing.JFrame {
         lblTitre.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         lblTitre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/myExpenses_Pink.png"))); // NOI18N
 
+        btnAddExpense.setBackground(new java.awt.Color(25, 23, 26));
+        btnAddExpense.setForeground(new java.awt.Color(255, 102, 196));
         btnAddExpense.setText("Add an expanse");
         btnAddExpense.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +73,8 @@ public class FenExpenses extends javax.swing.JFrame {
             }
         });
 
+        btnDeleteRow.setBackground(new java.awt.Color(25, 23, 26));
+        btnDeleteRow.setForeground(new java.awt.Color(255, 102, 196));
         btnDeleteRow.setText("Delete this expense");
         btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

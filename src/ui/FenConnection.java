@@ -54,6 +54,7 @@ public class FenConnection extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login page");
         setForeground(java.awt.Color.gray);
+        setResizable(false);
 
         lblLOGO.setFont(new java.awt.Font("Agency FB", 1, 72)); // NOI18N
         lblLOGO.setForeground(new java.awt.Color(255, 102, 196));
@@ -77,6 +78,8 @@ public class FenConnection extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(255, 102, 196));
         lblPassword.setText("pass");
 
+        btnLogin.setBackground(new java.awt.Color(25, 23, 26));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Log in");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +87,8 @@ public class FenConnection extends javax.swing.JFrame {
             }
         });
 
+        btnRegister.setBackground(new java.awt.Color(25, 23, 26));
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +96,9 @@ public class FenConnection extends javax.swing.JFrame {
             }
         });
 
-        btnQuitter.setText("Quitter");
+        btnQuitter.setBackground(new java.awt.Color(25, 23, 26));
+        btnQuitter.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuitter.setText("Exit");
         btnQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuitterActionPerformed(evt);
@@ -110,25 +117,26 @@ public class FenConnection extends javax.swing.JFrame {
                                 .addGap(246, 246, 246)
                                 .addComponent(lblPassword))
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addGap(223, 223, 223)
-                                .addComponent(btnQuitter))
-                            .addGroup(backgroundLayout.createSequentialGroup()
                                 .addGap(186, 186, 186)
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(backgroundLayout.createSequentialGroup()
                                         .addComponent(btnRegister)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                     .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(backgroundLayout.createSequentialGroup()
                                         .addGap(60, 60, 60)
                                         .addComponent(lblUsername))
                                     .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 138, Short.MAX_VALUE))
+                        .addGap(0, 165, Short.MAX_VALUE))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblLOGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(btnQuitter)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,16 +152,15 @@ public class FenConnection extends javax.swing.JFrame {
                         .addGap(84, 84, 84)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegister)
-                            .addComponent(btnLogin))
-                        .addContainerGap(146, Short.MAX_VALUE))
+                            .addComponent(btnLogin)))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPassword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuitter)
-                        .addGap(28, 28, 28))))
+                        .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(btnQuitter)
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,6 +189,7 @@ public class FenConnection extends javax.swing.JFrame {
         FenRegister fenRegister = new FenRegister();
         fenRegister.setVisible(true);
         fenRegister.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -196,12 +204,12 @@ public class FenConnection extends javax.swing.JFrame {
                 fenAppUi.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 this.dispose();
             } else {
-            JOptionPane.showMessageDialog(rootPane, "Informations de connexion incorrectes.",
-                    "Mauvais login", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Incorrect login information.",
+                    "Incorrect login", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Veuillez saisir vos informations.",
-                    "Données manquantes.", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Please enter your information.",
+                    "Missing data", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

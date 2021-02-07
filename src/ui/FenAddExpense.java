@@ -40,7 +40,7 @@ public class FenAddExpense extends javax.swing.JFrame {
         background = background =  new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
-                    FenConnection.class.getResource("/img/background.png"));
+                    FenConnection.class.getResource("/img/wowBackground.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };
@@ -74,15 +74,20 @@ public class FenAddExpense extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add an expense");
+        setResizable(false);
 
-        btnMenuPrincipal.setText("Menu principal");
+        btnMenuPrincipal.setBackground(new java.awt.Color(25, 23, 26));
+        btnMenuPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuPrincipal.setText("Home Menu");
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalActionPerformed(evt);
             }
         });
 
-        btnSeeExpenses.setText("Voir liste de transactions");
+        btnSeeExpenses.setBackground(new java.awt.Color(25, 23, 26));
+        btnSeeExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeeExpenses.setText("See all my expenses");
         btnSeeExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeeExpensesActionPerformed(evt);
@@ -93,16 +98,16 @@ public class FenAddExpense extends javax.swing.JFrame {
         lblDate.setText("Date");
 
         lblCategorie.setForeground(new java.awt.Color(255, 255, 255));
-        lblCategorie.setText("Catégorie");
+        lblCategorie.setText("Category");
 
         lblCommerce.setForeground(new java.awt.Color(255, 255, 255));
-        lblCommerce.setText("Commerce");
+        lblCommerce.setText("Merchant");
 
         lblMontant.setForeground(new java.awt.Color(255, 255, 255));
-        lblMontant.setText("Montant");
+        lblMontant.setText("Amount");
 
         lblShareWith.setForeground(new java.awt.Color(255, 255, 255));
-        lblShareWith.setText("ShareWith");
+        lblShareWith.setText("Share with");
 
         lblNotes.setForeground(new java.awt.Color(255, 255, 255));
         lblNotes.setText("Notes");
@@ -131,7 +136,9 @@ public class FenAddExpense extends javax.swing.JFrame {
             }
         });
 
-        btnAjouter.setText("Ajouter");
+        btnAjouter.setBackground(new java.awt.Color(25, 23, 26));
+        btnAjouter.setForeground(new java.awt.Color(255, 255, 255));
+        btnAjouter.setText("Add expense");
         btnAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAjouterActionPerformed(evt);
@@ -140,7 +147,7 @@ public class FenAddExpense extends javax.swing.JFrame {
 
         lblLastBillAdded.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblLastBillAdded.setForeground(new java.awt.Color(255, 255, 255));
-        lblLastBillAdded.setText("Dernière facture ajoutée");
+        lblLastBillAdded.setText("Last transaction added:");
 
         lblLastBillCAndC.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblLastBillCAndC.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,7 +178,7 @@ public class FenAddExpense extends javax.swing.JFrame {
                 .addComponent(btnSeeExpenses)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addGap(0, 67, Short.MAX_VALUE)
+                .addGap(0, 72, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,17 +351,16 @@ public class FenAddExpense extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeeExpensesActionPerformed
     
     private void resetTextFields(){
-        ddField.setText(""); mmField.setText(""); yyField.setText("");
+        ddField.setText(""); mmField.setText("");
         commerceField.setText(""); categorieField.setText("");
         montantField.setText(""); notesTextArea.setText("");
-        shareWithComboBox.setSelectedIndex(0);
         // Met à jour la dernière transaction entrée
         refreshLastTransactionEntered();
     }
     
     private void refreshLastTransactionEntered(){
         fenExpenses.setVisible(false);
-        //fenExpenses.refreshExpenseTable();
+        fenExpenses.refreshExpenseTable();
         int lastIndex = fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1;
         lblLastBillDate.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(lastIndex).getDate())); 
         lblLastBillCAndC.setText(fenExpenses.onLoadListeTransaction.getListeTransaction().get(lastIndex).getCommerce()

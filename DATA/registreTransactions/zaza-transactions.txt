@@ -1,1 +1,2 @@
-2021-01-01;Test;JojoBank;deleteME;0.0;1;zaza
+2999-12-31;I am;sorry;dont delete me!;0;0;null
+2021-02-21;salut;test;test ? ...;10.0;2;jones

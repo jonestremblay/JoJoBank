@@ -41,7 +41,7 @@ public class FenBills extends javax.swing.JFrame {
         background = background =  new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
-                    FenConnection.class.getResource("/img/background.png"));
+                    FenConnection.class.getResource("/img/wowBackground.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };
@@ -101,10 +101,13 @@ public class FenBills extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Your bills");
+        setResizable(false);
 
         background.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnMenuPrincipal.setText("Menu principal");
+        btnMenuPrincipal.setBackground(new java.awt.Color(25, 23, 26));
+        btnMenuPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuPrincipal.setText("Home Menu");
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalActionPerformed(evt);
@@ -141,7 +144,7 @@ public class FenBills extends javax.swing.JFrame {
 
         radioBtnGroup.add(rBtnFactureUnique);
         rBtnFactureUnique.setForeground(new java.awt.Color(255, 255, 255));
-        rBtnFactureUnique.setText("Facture unique");
+        rBtnFactureUnique.setText("Single invoice");
         rBtnFactureUnique.setOpaque(false);
         rBtnFactureMensuelle.addActionListener(
             new ActionListener(){
@@ -170,7 +173,7 @@ public class FenBills extends javax.swing.JFrame {
 
                 radioBtnGroup.add(rBtnFactureMensuelle);
                 rBtnFactureMensuelle.setForeground(new java.awt.Color(255, 255, 255));
-                rBtnFactureMensuelle.setText("Facture mensuelle");
+                rBtnFactureMensuelle.setText("Monthly bill");
                 rBtnFactureMensuelle.setOpaque(false);
                 rBtnFactureMensuelle.addActionListener(
                     new ActionListener(){
@@ -199,18 +202,20 @@ public class FenBills extends javax.swing.JFrame {
                         lblYY.setText("YY");
 
                         lblCreancier.setForeground(new java.awt.Color(255, 255, 255));
-                        lblCreancier.setText("Créancier");
+                        lblCreancier.setText("Creditor");
 
                         lblDescription.setForeground(new java.awt.Color(255, 255, 255));
                         lblDescription.setText("Description");
 
                         lblMontant.setForeground(new java.awt.Color(255, 255, 255));
-                        lblMontant.setText("Montant");
+                        lblMontant.setText("Amount");
 
                         lblDateLimite.setForeground(new java.awt.Color(255, 255, 255));
-                        lblDateLimite.setText("Date limite");
+                        lblDateLimite.setText("Due date");
 
-                        btnAjouterFacture.setText("Ajouter facture");
+                        btnAjouterFacture.setBackground(new java.awt.Color(25, 23, 26));
+                        btnAjouterFacture.setForeground(new java.awt.Color(255, 255, 255));
+                        btnAjouterFacture.setText("Add bill");
                         btnAjouterFacture.addActionListener(new java.awt.event.ActionListener() {
                             public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 btnAjouterFactureActionPerformed(evt);
@@ -220,7 +225,7 @@ public class FenBills extends javax.swing.JFrame {
                         jScrollPane2.setViewportView(factureTable);
 
                         lblMensualiteString.setForeground(new java.awt.Color(255, 255, 255));
-                        lblMensualiteString.setText("Mensualité totale :");
+                        lblMensualiteString.setText("Total monthly payment :");
 
                         lblMensualite.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
                         String mensualite = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureMensuelle());
@@ -232,6 +237,8 @@ public class FenBills extends javax.swing.JFrame {
                         lblTotalDette.setForeground(new java.awt.Color(255, 255, 255));
                         lblTotalDette.setText(dettes + " $");
 
+                        btnDeleteRow.setBackground(new java.awt.Color(25, 23, 26));
+                        btnDeleteRow.setForeground(new java.awt.Color(255, 255, 255));
                         btnDeleteRow.setText("Delete row");
                         btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
                             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +247,7 @@ public class FenBills extends javax.swing.JFrame {
                         });
 
                         lblTotalDettesString.setForeground(new java.awt.Color(255, 255, 255));
-                        lblTotalDettesString.setText("Total des dettes   :");
+                        lblTotalDettesString.setText("Total debts :");
 
                         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
                         background.setLayout(backgroundLayout);
@@ -254,22 +261,20 @@ public class FenBills extends javax.swing.JFrame {
                                             .addComponent(creancierField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(backgroundLayout.createSequentialGroup()
-                                        .addGap(0, 0, 0)
-                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
-                                                .addComponent(btnDeleteRow)
-                                                .addGap(175, 175, 175)
-                                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(lblTotalDettesString)
-                                                            .addComponent(lblMensualiteString))
-                                                        .addGap(47, 47, 47)
-                                                        .addComponent(lblTotalDette))
-                                                    .addComponent(lblMensualite, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(backgroundLayout.createSequentialGroup()
+                                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblTotalDettesString)
+                                                .addGroup(backgroundLayout.createSequentialGroup()
+                                                    .addComponent(btnDeleteRow)
+                                                    .addGap(152, 152, 152)
+                                                    .addComponent(lblMensualiteString)))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblMensualite, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblTotalDette, javax.swing.GroupLayout.Alignment.TRAILING)))))
                                 .addGap(68, 68, 68))
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +315,7 @@ public class FenBills extends javax.swing.JFrame {
                                     .addGroup(backgroundLayout.createSequentialGroup()
                                         .addGap(16, 16, 16)
                                         .addComponent(btnMenuPrincipal)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(19, 33, Short.MAX_VALUE))
                         );
                         backgroundLayout.setVerticalGroup(
                             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,23 +323,20 @@ public class FenBills extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblMensualiteString)
+                                        .addComponent(lblMensualite, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnDeleteRow))
+                                .addGap(32, 32, 32)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblTotalDettesString)
+                                    .addComponent(lblTotalDette, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(39, 39, 39))
-                                    .addGroup(backgroundLayout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblMensualiteString)
-                                            .addComponent(lblMensualite, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnDeleteRow))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblTotalDettesString)
-                                            .addComponent(lblTotalDette, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(23, 23, 23)
                                         .addComponent(lblCreancier)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(creancierField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,16 +353,20 @@ public class FenBills extends javax.swing.JFrame {
                                             .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(rBtnFactureMensuelle))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblDD)
-                                            .addComponent(lblMM)
-                                            .addComponent(lblYY)
-                                            .addComponent(rBtnFactureUnique))
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rBtnFactureUnique)
+                                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(lblDD)
+                                                .addComponent(lblMM)
+                                                .addComponent(lblYY)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblMontant)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(25, 25, 25)))
+                                        .addGap(25, 25, 25))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39)))
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnMenuPrincipal)
                                     .addComponent(btnAjouterFacture))

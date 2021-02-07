@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Add an expense"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -36,7 +37,7 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="background">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="background =  new JPanel() {&#xd;&#xa;            public void paintComponent(Graphics g) {&#xd;&#xa;                Image img = Toolkit.getDefaultToolkit().getImage(&#xd;&#xa;                    FenConnection.class.getResource(&quot;/img/background.png&quot;));&#xd;&#xa;                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xd;&#xa;            }&#xd;&#xa;        };"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="background =  new JPanel() {&#xa;    public void paintComponent(Graphics g) {&#xa;        Image img = Toolkit.getDefaultToolkit().getImage(&#xa;            FenConnection.class.getResource(&quot;/img/wowBackground.png&quot;));&#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xa;    }&#xa;}"/>
       </AuxValues>
 
       <Layout>
@@ -50,7 +51,7 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -186,7 +187,13 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnMenuPrincipal">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Menu principal"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="1a" green="17" red="19" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Home Menu"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalActionPerformed"/>
@@ -194,7 +201,13 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSeeExpenses">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Voir liste de transactions"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="1a" green="17" red="19" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="See all my expenses"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeeExpensesActionPerformed"/>
@@ -213,7 +226,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cat&#xe9;gorie"/>
+            <Property name="text" type="java.lang.String" value="Category"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCommerce">
@@ -221,7 +234,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Commerce"/>
+            <Property name="text" type="java.lang.String" value="Merchant"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMontant">
@@ -229,7 +242,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Montant"/>
+            <Property name="text" type="java.lang.String" value="Amount"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblShareWith">
@@ -237,7 +250,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="ShareWith"/>
+            <Property name="text" type="java.lang.String" value="Share with"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNotes">
@@ -318,7 +331,13 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAjouter">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ajouter"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="1a" green="17" red="19" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Add expense"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterActionPerformed"/>
@@ -332,7 +351,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Derni&#xe8;re facture ajout&#xe9;e"/>
+            <Property name="text" type="java.lang.String" value="Last transaction added:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblLastBillCAndC">

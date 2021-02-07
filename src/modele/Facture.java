@@ -91,46 +91,46 @@ public class Facture {
         String mois;
         switch(Integer.parseInt(resultDate[1])){
             case 1:
-                mois = "Janvier";
+                mois = "January";
                 break;
             case 2:
-                mois = "Février";
+                mois = "February";
                 break;
             case 3:
-                mois = "Mars";
+                mois = "March";
                 break;
             case 4:
-                mois = "Avril";
+                mois = "April";
                 break;
             case 5:
-                mois = "Mai";
+                mois = "May";
                 break;
             case 6:
-                mois = "Juin";
+                mois = "June";
                 break;
             case 7:
-                mois = "Juillet";
+                mois = "July";
                 break;
             case 8:
-                mois = "Août";
+                mois = "August";
                 break;
             case 9:
-                mois = "Septembre";
+                mois = "September";
                 break;
             case 10:
-                mois = "Octobre";
+                mois = "October";
                 break;
             case 11:
-                mois = "Novembre";
+                mois = "November";
                 break;
             case 12:
-                mois = "Décembre";
+                mois = "December";
                 break;
             default:
                 mois = "???";
                 break;
         }
-        String formattedDate = resultDate[2] + " " + mois + " " + resultDate[0];
+        String formattedDate = mois + " " + resultDate[2] + "th " + resultDate[0];
         System.out.println(formattedDate);
         return formattedDate;
     }
@@ -142,7 +142,7 @@ public class Facture {
      * @return $jourDate du mois
      */
     public static String formatDateFactureMensuelle(String jourDate){
-        return jourDate + " du mois";
+        return jourDate + " of the month";
     }
 
     @Override

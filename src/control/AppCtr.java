@@ -27,9 +27,7 @@ public class AppCtr {
             FenConnection fenConnection = new FenConnection();
             fenConnection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             fenConnection.setVisible(true);
-            fenConnection.setTitle("Connexion à Jojo's Bank");
-           
-            
+            fenConnection.setTitle("Connexion à Jojo's Bank"); 
     }
     
 }

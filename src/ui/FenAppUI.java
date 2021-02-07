@@ -45,18 +45,15 @@ public class FenAppUI extends javax.swing.JFrame {
         btnAddViewBills = new javax.swing.JButton();
         btnYouOwe = new javax.swing.JButton();
         btnDisconnect = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Page d'acceuil");
+        setResizable(false);
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 80)); // NOI18N
-        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bienvenue.png"))); // NOI18N
+        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/welcomeBanner.png"))); // NOI18N
 
         lblClientName.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         lblClientName.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,7 +101,11 @@ public class FenAppUI extends javax.swing.JFrame {
             }
         });
 
+        btnDisconnect.setBackground(new java.awt.Color(255, 102, 196));
+        btnDisconnect.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        btnDisconnect.setForeground(new java.awt.Color(0, 0, 0));
         btnDisconnect.setText("Disconnect");
+        btnDisconnect.setBorder(BorderFactory.createBevelBorder(0));
         btnDisconnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDisconnectActionPerformed(evt);
@@ -122,23 +123,23 @@ public class FenAppUI extends javax.swing.JFrame {
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAddViewBills, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(47, 47, 47)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnYouOwe)
                             .addComponent(btnSeeExpenses)))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblClientName)
-                .addGap(129, 129, 129))
-            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backgroundLayout.createSequentialGroup()
-                    .addGap(6, 6, 6)
-                    .addComponent(btnDisconnect)
-                    .addContainerGap(600, Short.MAX_VALUE)))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(lblClientName)
+                        .addGap(129, 129, 129))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(btnDisconnect)
+                        .addContainerGap())))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,28 +156,10 @@ public class FenAppUI extends javax.swing.JFrame {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAddViewBills, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnYouOwe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
-            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backgroundLayout.createSequentialGroup()
-                    .addContainerGap(532, Short.MAX_VALUE)
-                    .addComponent(btnDisconnect)
-                    .addContainerGap()))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(btnDisconnect)
+                .addContainerGap())
         );
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,19 +217,15 @@ public class FenAppUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JPanel background;
     private javax.swing.JButton btnAddExpenses;
     private javax.swing.JButton btnAddViewBills;
     private javax.swing.JButton btnDisconnect;
     private javax.swing.JButton btnSeeExpenses;
     private javax.swing.JButton btnYouOwe;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblClientName;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class ExpenseTableModel extends AbstractTableModel{
 
-    private String[] columnNames = {"Date", "Catégorie", "Commerce", "Notes", "Montant", "# de facture", "ShareWith"};
+    private String[] columnNames = {"Date", "Category", "Merchant", "Notes", "Amount", "Bill #", "Share with"};
     private ArrayList<Transaction> listeTransactions;
     
     public ExpenseTableModel(ArrayList<Transaction> listeT){

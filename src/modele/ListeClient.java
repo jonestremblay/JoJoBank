@@ -10,7 +10,6 @@ import utils.ClientExistantException;
 
 
 public abstract class ListeClient {
-    //private static ArrayList<Client> listeClient = new ArrayList<>();
     private static Set listeClient = new TreeSet(new ClientComparator());
     
     public ListeClient(){
@@ -32,10 +31,10 @@ public abstract class ListeClient {
      */
     public static void ajouterClient(Client client) throws ClientExistantException {
         if (verifierDoublon(client)){
-            throw new ClientExistantException(client, "Ce client existe déjà");
+            throw new ClientExistantException(client, "This client already exists.");
         }else {
             listeClient.add(client);
-            JOptionPane.showMessageDialog(null, client + " a été ajouté.", "Succès", 0);
+            JOptionPane.showMessageDialog(null, client + " was added successfully.", "Success", 0);
             System.out.println(listeClient.toString());
         }
     }
