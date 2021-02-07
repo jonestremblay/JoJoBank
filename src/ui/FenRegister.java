@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ui;
 
 import java.awt.Graphics;
@@ -11,7 +7,6 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import modele.Client;
@@ -21,10 +16,7 @@ import utils.ClientExistantException;
 import utils.FileManip;
 import utils.FormValidation;
 
-/**
- *
- * @author Jones
- */
+
 public class FenRegister extends javax.swing.JFrame {
     
     
@@ -190,8 +182,9 @@ public class FenRegister extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         
-        // catch les input values (name, username, pass)
+        // Vérifie que la saisie est valide
         if(FormValidation.requiredFieldsFilled(nameField, usernameField, passwordField)){
+            // Vérifie que le password est assez sécuritaire
             if (FormValidation.passIsValid(passwordField.getText())){
             String name = nameField.getText();
             String username = usernameField.getText();
@@ -202,6 +195,10 @@ public class FenRegister extends javax.swing.JFrame {
                 FileManip.ecrireClientDansRegistre(client);
                 
                 File registre = new File("DATA/registreTransactions/" + client.getUsername() + "-transactions.txt");
+                /* Ici on crée tout de suite un fichier de transactions pour le client 
+                   afin d'éviter tout problème de fonctionnalités lors de la connexion.
+                   (pour les fenetre de transactions, si il n'y a pas de fichier, ça ne fonctionne pas)
+                */
                 registre.createNewFile();
                 Transaction defaultFirstTransaction = new Transaction(LocalDate.of(2021, 01, 01),
                                             "Test", "JojoBank", "deleteME", 0, 1, client);

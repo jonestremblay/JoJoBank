@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ui;
 
 import java.awt.Graphics;
@@ -15,10 +11,7 @@ import utils.FileManip;
 import utils.FormValidation;
 import utils.UserSession;
 
-/**
- *
- * @author Jones
- */
+
 public class FenConnection extends javax.swing.JFrame {
 
     /**
@@ -27,7 +20,7 @@ public class FenConnection extends javax.swing.JFrame {
     public FenConnection() {
         initComponents();
         FileManip.chargerCollectionClient();
-       //   this.getRootPane().setDefaultButton(btnLogin);
+        this.getRootPane().setDefaultButton(btnLogin);
     }
 
     /**
@@ -192,9 +185,10 @@ public class FenConnection extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        
+        // On vérifie que la saisie est valide
         if(FormValidation.verifierSaisie_LOGIN(userField.getText(), passField.getPassword())){
             String pass = String.valueOf(passField.getPassword());
+            // On cherche le client dans la liste, si true --> connecté
             if(FileManip.chercherClientDansListe(userField.getText(), pass)){
                 UserSession.client = FileManip.getClientFromFile(userField.getText(), pass);
                 FenAppUI fenAppUi = new FenAppUI();

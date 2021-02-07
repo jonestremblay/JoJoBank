@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -20,12 +15,10 @@ import utils.FileManip;
 import utils.FormValidation;
 import utils.UserSession;
 
-/**
- *
- * @author Jones
- */
+
 public class FenBills extends javax.swing.JFrame {
     ListeFacture onLoadListeFacture = FileManip.lireFichierAjouterFacture(UserSession.client);
+    
     /**
      * Creates new form FenBills
      */
@@ -406,6 +399,8 @@ public class FenBills extends javax.swing.JFrame {
     private void btnAjouterFactureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterFactureActionPerformed
         String date = "";
         double montant = 0;
+        // Vérifie quelle type de facture est séléctionné
+        
         if (rBtnFactureUnique.isSelected()) {
             
             if (FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
@@ -413,14 +408,18 @@ public class FenBills extends javax.swing.JFrame {
             } else{
                 JOptionPane.showMessageDialog(rootPane, "Invalid date. Are you sure this date exists in the calendar ?", "Invalid date", JOptionPane.ERROR_MESSAGE);
             }
+            
         } else if (rBtnFactureMensuelle.isSelected()){
 
             if (FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
                 date = Facture.formatDateFactureMensuelle(ddField.getText());
             } 
+            
         } else if (!rBtnFactureMensuelle.isSelected() && !rBtnFactureUnique.isSelected()){
             JOptionPane.showMessageDialog(rootPane, "Please select a bill type.", "Incorrect bill type", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
         try {
             montant = Double.parseDouble(montantField.getText());
         } catch (NumberFormatException e) {
@@ -432,6 +431,7 @@ public class FenBills extends javax.swing.JFrame {
                                     Double.parseDouble(montantField.getText()));
             FileManip.ecrireFactureFichier(UserSession.client, facture);
             onLoadListeFacture.setListeFacture(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
+            // Actualiser la factureTable.
             FactureTableModel model = new FactureTableModel(onLoadListeFacture.getListeFacture());
             factureTable.setModel(model);
             actualiserLabels();
@@ -439,13 +439,16 @@ public class FenBills extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAjouterFactureActionPerformed
 
     private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
-        
+        // On crée un model basé sur la table et son contenu
         FactureTableModel model = new FactureTableModel(FileManip.lireFichierAjouterFacture(UserSession.client).getListeFacture());
         int rowIndexSelected = factureTable.getSelectedRow();
+        // On créer la nouvelle liste de facture après DELETION.
         ListeFacture lf = FileManip.getNewListeFactureAfterDeletion(UserSession.client, model.getRow(rowIndexSelected));
+        // On overwrite cette nouvelle liste dans le fichier facture
         FileManip.ecrireListeFactureDansFichier(UserSession.client, lf);
+        // On créer un nouveau table model avec la nouvelle liste mise à jour
         FactureTableModel newModel = new FactureTableModel(lf.getListeFacture());
-        //newModel.fireTableRowsDeleted(rowIndexSelected, rowIndexSelected);
+        // On met à jour le model de la table.
         factureTable.setModel(newModel);
         actualiserLabels();
     }//GEN-LAST:event_btnDeleteRowActionPerformed

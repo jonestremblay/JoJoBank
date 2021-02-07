@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ui;
 
 import java.awt.Graphics;
@@ -21,10 +17,7 @@ import utils.FileManip;
 import utils.FormValidation;
 import utils.UserSession;
 
-/**
- *
- * @author Jones
- */
+
 public class FenAddExpense extends javax.swing.JFrame {
     FenExpenses fenExpenses = new FenExpenses();
     
@@ -317,6 +310,7 @@ public class FenAddExpense extends javax.swing.JFrame {
         String user = shareWithComboBox.getSelectedItem().toString();
         Client shareWith = ListeClient.getClientWithUsername(user);
         
+        // Vérifie que la date est valide, pour continuer
         if(FormValidation.checkDateValidityFacture(ddField, mmField, yyField)){
             date = FormValidation.getLocalDateFromString(ddField, mmField, yyField);
             strDate = date.format(formatter);
@@ -334,7 +328,6 @@ public class FenAddExpense extends javax.swing.JFrame {
                 // Créer la transaction
                 Transaction transaction = new Transaction(
                 date, categorie, commerce, notes, montant, UserSession.transactionsCount + 1, shareWith);
-                System.out.println(transaction.toString());
                 // Écrire la transaction dans le fichier
                 FileManip.ecrireTransactionFichier(UserSession.client, transaction);
                 resetTextFields();
@@ -350,18 +343,16 @@ public class FenAddExpense extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSeeExpensesActionPerformed
     
-   
-    
     private void resetTextFields(){
         ddField.setText(""); mmField.setText(""); yyField.setText("");
         commerceField.setText(""); categorieField.setText("");
         montantField.setText(""); notesTextArea.setText("");
         shareWithComboBox.setSelectedIndex(0);
-        refreshLastBillEntered();
+        // Met à jour la dernière transaction entrée
+        refreshLastTransactionEntered();
     }
     
-    private void refreshLastBillEntered(){
-        FenExpenses fenExpenses = new FenExpenses();
+    private void refreshLastTransactionEntered(){
         fenExpenses.setVisible(false);
         //fenExpenses.refreshExpenseTable();
         int lastIndex = fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1;

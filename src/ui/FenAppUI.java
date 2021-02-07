@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ui;
 
 import java.awt.Graphics;
@@ -13,10 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import utils.UserSession;
 
-/**
- *
- * @author Jones
- */
+
 public class FenAppUI extends javax.swing.JFrame {
 
     /**
@@ -231,6 +224,10 @@ public class FenAppUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSeeExpensesActionPerformed
     
+    /* 
+        Change le nom au dessous du message de bienvenue, 
+        selon le nom du client connecté
+    */
     private void setClientNameLabel(){
         UserSession.client.getName();
         lblClientName.setText(UserSession.client.getName());
