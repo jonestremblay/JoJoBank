@@ -7,7 +7,6 @@ package modele;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,6 +92,10 @@ public class Transaction {
         this.shareWith = shareWith;
     }
     
+    /**
+     * Créer une ligne "CSV" pour l'objet transaction
+     * @return string d'un objet transaction pour CSV
+     */
     public String convertirTransactionLigne(){
         return String.valueOf(this.date) + ";" +
         this.categorie + ";" + this.commerce + ";" +
@@ -101,7 +104,12 @@ public class Transaction {
         String.valueOf(this.shareWith.getUsername());
     }
     
-     public static String formatDateTransaction(String dateString){
+    /**
+     * Formatte la date de la transaction selon le format en return
+     * @param dateString
+     * @return yyyy mon(FRENCH) dd
+     */
+    public static String formatDateTransaction(String dateString){
        
         String[] dateData = dateString.split(" ");
         LocalDate date = null;
@@ -110,7 +118,6 @@ public class Transaction {
         } catch(DateTimeException dte){
             JOptionPane.showMessageDialog(null, "Invalid date. Are you sure this date exists in the calendar ?", dte.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-        //df.format(date);
         
         String[] resultDate = date.toString().split("-");
         String mois;
@@ -156,7 +163,8 @@ public class Transaction {
                 break;
         }
         String formattedDate = resultDate[2] + " " + mois + " " + resultDate[0];
-        //String formattedDate = resultDate[2] + " " + resultDate[1] + " " + resultDate[0];
+        // Pour donner le mois en chiffre directement
+        // String formattedDate = resultDate[2] + " " + resultDate[1] + " " + resultDate[0];
         return formattedDate;
     }
     

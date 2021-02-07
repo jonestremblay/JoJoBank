@@ -6,7 +6,6 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
@@ -33,8 +32,11 @@ public abstract class ListeClient {
         ListeClient.listeClient = listeClient;
     }
     
-
-    
+    /**
+     * Ajoute un client au set listeClient, si ce n'est pas un doublon.
+     * @param client
+     * @throws ClientExistantException
+     */
     public static void ajouterClient(Client client) throws ClientExistantException {
         if (verifierDoublon(client)){
             throw new ClientExistantException(client, "Ce client existe déjà");
@@ -45,7 +47,12 @@ public abstract class ListeClient {
         }
     }
     
-    private static boolean verifierDoublon(Client client) {
+    /**
+     * Vérifie que le client donné en param. n'existe pas déjà dans le set.
+     * @param client
+     * @return
+     */
+    public static boolean verifierDoublon(Client client) {
         ArrayList<Client> listeClient = new ArrayList<Client>();
         for (Object c: ListeClient.listeClient){
             listeClient.add((Client)c);
@@ -58,6 +65,12 @@ public abstract class ListeClient {
         return false;
     }
     
+    /**
+     * Avec le username d'un client donné en paramètre, trouve
+     * et return ce même client.
+     * @param username
+     * @return
+     */
     public static Client getClientWithUsername(String username){
         ArrayList<Client> listeClient = new ArrayList<Client>();
         Client client = null;

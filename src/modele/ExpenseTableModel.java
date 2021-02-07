@@ -7,8 +7,6 @@ package modele;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -90,6 +88,12 @@ public class ExpenseTableModel extends AbstractTableModel{
         }
     }
     
+    /**
+     * Retourne un objet transaction correspondant à la rangée
+     * donnée en paramètre
+     * @param row
+     * @return Transaction transactionDeLaRangée
+     */
     public Transaction getRow(int row){
         LocalDate date = (LocalDate) getValueAt(row, 0);
         String categorie = String.valueOf(getValueAt(row, 1));

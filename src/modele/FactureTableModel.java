@@ -5,10 +5,8 @@
  */
 package modele;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-import utils.UserSession;
 
 /**
  *
@@ -88,6 +86,11 @@ public class FactureTableModel extends AbstractTableModel{
         fireTableRowsInserted(listeFacture.size() -1, listeFacture.size() -1);
     }
     
+    /**
+     * Retourne l'objet facture de la rangée donnée en paramètre.
+     * @param row
+     * @return Facture factureDeLaRangée
+     */
     public Facture getRow(int row){
         String creancier = String.valueOf(getValueAt(row, 0));
         String description = String.valueOf(getValueAt(row, 1));

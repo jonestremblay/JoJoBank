@@ -104,7 +104,6 @@ public class Client{
         return true;
     }
 
-   
     /**
      * Converti un objet Client en ligne
      * @param client
@@ -113,10 +112,6 @@ public class Client{
     public static String convertirClientLigne(Client client){
         return client.getName() + ";" + client.getUsername() + ";" + client.getPassword();
     }
-    
-    
-    
-    
     
     @Override
     public String toString() {

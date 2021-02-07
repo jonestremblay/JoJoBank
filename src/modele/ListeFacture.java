@@ -33,11 +33,15 @@ public class ListeFacture {
         this.listeFacture.add(facture);
     }
     
-    
     public void remove(Facture facture){
         this.listeFacture.remove(facture);
     }
     
+    /**
+     * Calcule la somme des factures mensuelles contenues dans la
+     * liste des factures.
+     * @return double sommeFactureMensuelles
+     */
     public Double calculerSommeFactureMensuelle(){
         double montant = 0;
         for(Facture f : listeFacture){
@@ -48,6 +52,11 @@ public class ListeFacture {
         return montant;
     }
     
+    /**
+     * Calcule la somme des factures uniques contenues dans la
+     * liste des factures.
+     * @return double sommeFactureUniques
+     */
     public Double calculerSommeFactureUnique(){
         double montant = 0;
         for(Facture f : listeFacture){

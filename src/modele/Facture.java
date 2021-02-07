@@ -5,23 +5,16 @@
  */
 package modele;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import ui.FenBills;
 
 /**
  *
  * @author Jones
  */
+
 public class Facture {
     String description;
     String creancier;
@@ -74,9 +67,10 @@ public class Facture {
     }
     
     
-    /*
-    Retourne facture en format CSV. 
-    */
+    /**
+     * Retourne facture en format CSV. 
+     * @return csv String
+     */
     public String convertirFactureEnLigne(){
         return creancier + ";" +
                description + ";" +
@@ -85,11 +79,12 @@ public class Facture {
 
     }
     
-//    public String getDateString(){
-//        DateFormat df = new SimpleDateFormat("dd MMM yy");
-//        return df.format(dateLimite);
-//    }
-    
+    /**
+     * Retourne la date de la facture sous le format d'une 
+     * facture unique
+     * @param dateString
+     * @return dd month yyyy
+     */
     public static String formatDateFactureUnique(String dateString){
        
         String[] dateData = dateString.split(" ");
@@ -99,9 +94,6 @@ public class Facture {
         } catch(DateTimeException dte){
             JOptionPane.showMessageDialog(null, "Invalid date. Are you sure this date exists in the calendar ?", dte.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-        //df.format(date);
-        System.out.println(date);
-        System.out.println(date.toString());
         
         String[] resultDate = date.toString().split("-");
         String mois;
@@ -151,7 +143,12 @@ public class Facture {
         return formattedDate;
     }
     
-   
+    /**
+     * Retourne la date de la facture sous le format d'une 
+     * date mensuelle : x du mois
+     * @param jourDate
+     * @return $jourDate du mois
+     */
     public static String formatDateFactureMensuelle(String jourDate){
         return jourDate + " du mois";
     }
