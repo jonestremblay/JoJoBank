@@ -5,9 +5,11 @@
  */
 package ui;
 
-import java.text.SimpleDateFormat;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
@@ -42,6 +44,13 @@ public class FenAddExpense extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        background = background =  new JPanel() {
+            public void paintComponent(Graphics g) {
+                Image img = Toolkit.getDefaultToolkit().getImage(
+                    FenConnection.class.getResource("/img/background.png"));
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
         btnMenuPrincipal = new javax.swing.JButton();
         btnSeeExpenses = new javax.swing.JButton();
         lblDate = new javax.swing.JLabel();
@@ -68,6 +77,7 @@ public class FenAddExpense extends javax.swing.JFrame {
         lblLastBillCAndC = new javax.swing.JLabel();
         lblLastBillDate = new javax.swing.JLabel();
         lblLastBillMontant = new javax.swing.JLabel();
+        lblAddExpenses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add an expense");
@@ -86,26 +96,35 @@ public class FenAddExpense extends javax.swing.JFrame {
             }
         });
 
+        lblDate.setForeground(new java.awt.Color(255, 255, 255));
         lblDate.setText("Date");
 
+        lblCategorie.setForeground(new java.awt.Color(255, 255, 255));
         lblCategorie.setText("Catégorie");
 
+        lblCommerce.setForeground(new java.awt.Color(255, 255, 255));
         lblCommerce.setText("Commerce");
 
+        lblMontant.setForeground(new java.awt.Color(255, 255, 255));
         lblMontant.setText("Montant");
 
+        lblShareWith.setForeground(new java.awt.Color(255, 255, 255));
         lblShareWith.setText("ShareWith");
 
+        lblNotes.setForeground(new java.awt.Color(255, 255, 255));
         lblNotes.setText("Notes");
 
         notesTextArea.setColumns(20);
         notesTextArea.setRows(5);
         jScrollPane1.setViewportView(notesTextArea);
 
+        lblDD.setForeground(new java.awt.Color(255, 255, 255));
         lblDD.setText("DD");
 
+        lblMM.setForeground(new java.awt.Color(255, 255, 255));
         lblMM.setText("MM");
 
+        lblYY.setForeground(new java.awt.Color(255, 255, 255));
         lblYY.setText("YY");
 
         int currYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -126,135 +145,153 @@ public class FenAddExpense extends javax.swing.JFrame {
             }
         });
 
-        lblLastBillAdded.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblLastBillAdded.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblLastBillAdded.setForeground(new java.awt.Color(255, 255, 255));
         lblLastBillAdded.setText("Dernière facture ajoutée");
 
+        lblLastBillCAndC.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblLastBillCAndC.setForeground(new java.awt.Color(255, 255, 255));
         lblLastBillCAndC.setText("");
         lblLastBillCAndC.setText(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getCommerce()
             + " | " + fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getCategorie());
 
+        lblLastBillDate.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblLastBillDate.setForeground(new java.awt.Color(255, 255, 255));
         lblLastBillDate.setText("");
         lblLastBillDate.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getDate()));
 
+        lblLastBillMontant.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblLastBillMontant.setForeground(new java.awt.Color(255, 255, 255));
         lblLastBillMontant.setText("");
         lblLastBillMontant.setText(String.valueOf(fenExpenses.onLoadListeTransaction.getListeTransaction().get(fenExpenses.onLoadListeTransaction.getListeTransaction().toArray().length - 1).getMontant()) + " $");
+
+        lblAddExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lblAddExpenses.png"))); // NOI18N
+
+        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+        background.setLayout(backgroundLayout);
+        backgroundLayout.setHorizontalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnMenuPrincipal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSeeExpenses)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                .addGap(0, 67, Short.MAX_VALUE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblShareWith, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblMontant, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNotes, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCommerce, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDate, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCategorie, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(backgroundLayout.createSequentialGroup()
+                                    .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblLastBillMontant))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
+                                    .addComponent(commerceField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblLastBillCAndC))
+                                .addGroup(backgroundLayout.createSequentialGroup()
+                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(categorieField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(backgroundLayout.createSequentialGroup()
+                                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(backgroundLayout.createSequentialGroup()
+                                            .addGap(12, 12, 12)
+                                            .addComponent(lblDD)
+                                            .addGap(28, 28, 28)
+                                            .addComponent(lblMM)
+                                            .addGap(29, 29, 29)
+                                            .addComponent(lblYY)))
+                                    .addGap(125, 125, 125)
+                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblLastBillDate, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblLastBillAdded)))
+                                .addComponent(lblAddExpenses, javax.swing.GroupLayout.Alignment.LEADING))))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(btnAjouter)))
+                .addGap(40, 40, 40))
+        );
+        backgroundLayout.setVerticalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(lblAddExpenses)
+                .addGap(33, 33, 33)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addComponent(lblLastBillAdded)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblLastBillDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblLastBillCAndC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblLastBillMontant)
+                        .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblYY)
+                            .addComponent(lblMM)
+                            .addComponent(lblDD))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDate))
+                        .addGap(18, 18, 18)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(categorieField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCategorie))
+                        .addGap(18, 18, 18)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(commerceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCommerce))
+                        .addGap(18, 18, 18)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMontant))
+                        .addGap(18, 18, 18)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblShareWith))
+                        .addGap(18, 18, 18)))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNotes))
+                .addGap(26, 26, 26)
+                .addComponent(btnAjouter)
+                .addGap(41, 41, 41)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeeExpenses)
+                    .addComponent(btnMenuPrincipal))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNotes)
-                            .addComponent(lblShareWith)
-                            .addComponent(lblMontant)
-                            .addComponent(lblCommerce)
-                            .addComponent(lblCategorie)
-                            .addComponent(lblDate)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenuPrincipal)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSeeExpenses)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(lblDD)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(lblMM)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(lblYY))))
-                                    .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(71, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(montantField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                    .addComponent(commerceField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(categorieField, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblLastBillDate)
-                                    .addComponent(lblLastBillAdded)
-                                    .addComponent(lblLastBillCAndC)
-                                    .addComponent(lblLastBillMontant))
-                                .addGap(24, 24, 24))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addComponent(btnAjouter)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDate))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDD)
-                    .addComponent(lblMM)
-                    .addComponent(lblYY))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categorieField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCategorie)
-                    .addComponent(lblLastBillAdded))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLastBillDate)
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(commerceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCommerce)
-                    .addComponent(lblLastBillCAndC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLastBillMontant)
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMontant))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(shareWithComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblShareWith))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNotes))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAjouter)
-                        .addGap(65, 88, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSeeExpenses)
-                            .addComponent(btnMenuPrincipal))
-                        .addContainerGap())))
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -337,6 +374,7 @@ public class FenAddExpense extends javax.swing.JFrame {
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background;
     private javax.swing.JButton btnAjouter;
     private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnSeeExpenses;
@@ -344,6 +382,7 @@ public class FenAddExpense extends javax.swing.JFrame {
     private javax.swing.JTextField commerceField;
     private javax.swing.JTextField ddField;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAddExpenses;
     private javax.swing.JLabel lblCategorie;
     private javax.swing.JLabel lblCommerce;
     private javax.swing.JLabel lblDD;

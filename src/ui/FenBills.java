@@ -5,29 +5,14 @@
  */
 package ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import modele.Facture;
 import modele.FactureTableModel;
 import modele.ListeFacture;
@@ -60,18 +45,25 @@ public class FenBills extends javax.swing.JFrame {
         radioBtnGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        background = background =  new JPanel() {
+            public void paintComponent(Graphics g) {
+                Image img = Toolkit.getDefaultToolkit().getImage(
+                    FenConnection.class.getResource("/img/background.png"));
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
         btnMenuPrincipal = new javax.swing.JButton();
         jPanel2 = new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
-                    FenConnection.class.getResource("/img/AddBill.png"));
+                    FenConnection.class.getResource("/img/lblAddBills.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };  ;
         jPanel3 = new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
-                    FenConnection.class.getResource("/img/myBills.png"));
+                    FenConnection.class.getResource("/img/lblMyBills.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };  ;
@@ -97,9 +89,9 @@ public class FenBills extends javax.swing.JFrame {
         factureTable.setModel(model);
         lblMensualiteString = new javax.swing.JLabel();
         lblMensualite = new javax.swing.JLabel();
-        lblTotalDettesString = new javax.swing.JLabel();
         lblTotalDette = new javax.swing.JLabel();
         btnDeleteRow = new javax.swing.JButton();
+        lblTotalDettesString = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,6 +109,8 @@ public class FenBills extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Your bills");
 
+        background.setForeground(new java.awt.Color(255, 255, 255));
+
         btnMenuPrincipal.setText("Menu principal");
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,14 +126,14 @@ public class FenBills extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 174, Short.MAX_VALUE)
+            .addGap(0, 177, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,12 +147,18 @@ public class FenBills extends javax.swing.JFrame {
         });
 
         radioBtnGroup.add(rBtnFactureUnique);
+        rBtnFactureUnique.setForeground(new java.awt.Color(255, 255, 255));
         rBtnFactureUnique.setText("Facture unique");
+        rBtnFactureUnique.setOpaque(false);
         rBtnFactureMensuelle.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent ie){
                     mmField.setEnabled(false); mmField.setText("");
                     yyField.setEnabled(false); yyField.setText("");
+                    mmField.setVisible(true); yyField.setVisible(true);
+                    mmField.revalidate(); mmField.repaint();
+                    yyField.revalidate(); yyField.repaint();
+
                 }
             });
             rBtnFactureUnique.addActionListener(
@@ -176,12 +176,15 @@ public class FenBills extends javax.swing.JFrame {
                 });
 
                 radioBtnGroup.add(rBtnFactureMensuelle);
+                rBtnFactureMensuelle.setForeground(new java.awt.Color(255, 255, 255));
                 rBtnFactureMensuelle.setText("Facture mensuelle");
+                rBtnFactureMensuelle.setOpaque(false);
                 rBtnFactureMensuelle.addActionListener(
                     new ActionListener(){
                         public void actionPerformed(ActionEvent ie){
                             mmField.setEnabled(false); mmField.setText("");
                             yyField.setEnabled(false); yyField.setText("");
+                            mmField.setVisible(false); yyField.setVisible(false);
                         }
                     });
                     rBtnFactureUnique.addActionListener(
@@ -193,18 +196,25 @@ public class FenBills extends javax.swing.JFrame {
                             }
                         });
 
+                        lblDD.setForeground(new java.awt.Color(255, 255, 255));
                         lblDD.setText("DD");
 
+                        lblMM.setForeground(new java.awt.Color(255, 255, 255));
                         lblMM.setText("MM");
 
+                        lblYY.setForeground(new java.awt.Color(255, 255, 255));
                         lblYY.setText("YY");
 
+                        lblCreancier.setForeground(new java.awt.Color(255, 255, 255));
                         lblCreancier.setText("Créancier");
 
+                        lblDescription.setForeground(new java.awt.Color(255, 255, 255));
                         lblDescription.setText("Description");
 
+                        lblMontant.setForeground(new java.awt.Color(255, 255, 255));
                         lblMontant.setText("Montant");
 
+                        lblDateLimite.setForeground(new java.awt.Color(255, 255, 255));
                         lblDateLimite.setText("Date limite");
 
                         btnAjouterFacture.setText("Ajouter facture");
@@ -216,16 +226,17 @@ public class FenBills extends javax.swing.JFrame {
 
                         jScrollPane2.setViewportView(factureTable);
 
+                        lblMensualiteString.setForeground(new java.awt.Color(255, 255, 255));
                         lblMensualiteString.setText("Mensualité totale :");
 
                         lblMensualite.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
                         String mensualite = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureMensuelle());
+                        lblMensualite.setForeground(new java.awt.Color(255, 255, 255));
                         lblMensualite.setText(mensualite + " $");
-
-                        lblTotalDettesString.setText("Total des dettes   :");
 
                         lblTotalDette.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
                         String dettes = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureUnique());
+                        lblTotalDette.setForeground(new java.awt.Color(255, 255, 255));
                         lblTotalDette.setText(dettes + " $");
 
                         btnDeleteRow.setText("Delete row");
@@ -235,111 +246,102 @@ public class FenBills extends javax.swing.JFrame {
                             }
                         });
 
-                        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                        getContentPane().setLayout(layout);
-                        layout.setHorizontalGroup(
-                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnMenuPrincipal)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(66, 66, 66)
-                                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(113, 113, 113)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnAjouterFacture)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(creancierField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                                .addComponent(descriptionField))
+                        lblTotalDettesString.setForeground(new java.awt.Color(255, 255, 255));
+                        lblTotalDettesString.setText("Total des dettes   :");
+
+                        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+                        background.setLayout(backgroundLayout);
+                        backgroundLayout.setHorizontalGroup(
+                            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
+                                        .addGap(363, 363, 363)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(creancierField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(backgroundLayout.createSequentialGroup()
+                                        .addGap(0, 0, 0)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
+                                                .addComponent(btnDeleteRow)
+                                                .addGap(175, 175, 175)
+                                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(lblTotalDettesString)
+                                                            .addComponent(lblMensualiteString))
+                                                        .addGap(47, 47, 47)
+                                                        .addComponent(lblTotalDette))
+                                                    .addComponent(lblMensualite, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                .addGap(68, 68, 68))
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(backgroundLayout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblCreancier)
                                             .addComponent(lblDescription)
                                             .addComponent(lblDateLimite)
+                                            .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblMontant)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(montantField, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addGap(6, 6, 6)
-                                                                .addComponent(lblDD)))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addGap(6, 6, 6)
-                                                                .addComponent(lblMM)))))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addComponent(lblYY)))))
-                                        .addGap(135, 135, 135))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rBtnFactureUnique)
-                                            .addComponent(rBtnFactureMensuelle))))
-                                .addGap(46, 46, 46))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnDeleteRow)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblMensualiteString)
-                                            .addComponent(lblTotalDettesString))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTotalDette)
-                                            .addComponent(lblMensualite))))
-                                .addGap(0, 14, Short.MAX_VALUE))
+                                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(btnAjouterFacture)
+                                                .addGroup(backgroundLayout.createSequentialGroup()
+                                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(backgroundLayout.createSequentialGroup()
+                                                            .addGap(6, 6, 6)
+                                                            .addComponent(lblDD)))
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(backgroundLayout.createSequentialGroup()
+                                                            .addGap(6, 6, 6)
+                                                            .addComponent(lblMM)))
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(backgroundLayout.createSequentialGroup()
+                                                            .addGap(6, 6, 6)
+                                                            .addComponent(lblYY)))
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(rBtnFactureUnique)
+                                                        .addComponent(rBtnFactureMensuelle))))))
+                                    .addGroup(backgroundLayout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(btnMenuPrincipal)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         );
-                        layout.setVerticalGroup(
-                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(11, Short.MAX_VALUE)
+                        backgroundLayout.setVerticalGroup(
+                            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(112, 112, 112)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblMensualiteString)
-                                            .addComponent(lblMensualite, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblTotalDette, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblTotalDettesString)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDeleteRow)
-                                .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblMontant)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(btnAjouterFacture)
-                                            .addComponent(btnMenuPrincipal))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(39, 39, 39))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(backgroundLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblMensualiteString)
+                                            .addComponent(lblMensualite, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnDeleteRow))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblTotalDettesString)
+                                            .addComponent(lblTotalDette, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(23, 23, 23)
                                         .addComponent(lblCreancier)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(creancierField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,22 +351,38 @@ public class FenBills extends javax.swing.JFrame {
                                         .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblDateLimite)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rBtnFactureMensuelle))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(ddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(mmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(yyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblDD)
-                                                    .addComponent(lblMM)
-                                                    .addComponent(lblYY)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(rBtnFactureMensuelle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(rBtnFactureUnique)))
-                                        .addGap(119, 119, 119))))
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblDD)
+                                            .addComponent(lblMM)
+                                            .addComponent(lblYY)
+                                            .addComponent(rBtnFactureUnique))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblMontant)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(montantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(25, 25, 25)))
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnMenuPrincipal)
+                                    .addComponent(btnAjouterFacture))
+                                .addGap(24, 24, 24))
+                        );
+
+                        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                        getContentPane().setLayout(layout);
+                        layout.setHorizontalGroup(
+                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        );
+                        layout.setVerticalGroup(
+                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         );
 
                         pack();
@@ -444,6 +462,7 @@ public class FenBills extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background;
     private javax.swing.JButton btnAjouterFacture;
     private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnMenuPrincipal;

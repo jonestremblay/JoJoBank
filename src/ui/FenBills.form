@@ -49,30 +49,78 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMenuPrincipal" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+          <Component id="background" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="background" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="background">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="background =  new JPanel() {&#xd;&#xa;            public void paintComponent(Graphics g) {&#xd;&#xa;                Image img = Toolkit.getDefaultToolkit().getImage(&#xd;&#xa;                    FenConnection.class.getResource(&quot;/img/background.png&quot;));&#xd;&#xa;                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xd;&#xa;            }&#xd;&#xa;        };"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="creancierField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="descriptionField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jPanel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="1" min="-2" pref="530" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnDeleteRow" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lblTotalDettesString" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblMensualiteString" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                          <Component id="lblTotalDette" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lblMensualite" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAjouterFacture" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="creancierField" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="descriptionField" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="lblCreancier" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDateLimite" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMontant" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="montantField" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblCreancier" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDateLimite" min="-2" max="-2" attributes="0"/>
+                              <Component id="montantField" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="lblMontant" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="btnAjouterFacture" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="ddField" min="-2" pref="30" max="-2" attributes="0"/>
@@ -89,317 +137,319 @@
                                               <Component id="lblMM" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="yyField" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                              <Component id="lblYY" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="rBtnFactureUnique" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rBtnFactureMensuelle" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="yyField" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                      <Component id="lblYY" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rBtnFactureUnique" min="-2" max="-2" attributes="0"/>
-                          <Component id="rBtnFactureMensuelle" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="btnMenuPrincipal" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="19" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnDeleteRow" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblMensualiteString" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTotalDettesString" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblTotalDette" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMensualite" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace pref="11" max="32767" attributes="0"/>
-              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblMensualiteString" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMensualite" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTotalDette" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="lblTotalDettesString" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="141" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnDeleteRow" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblMontant" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="montantField" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAjouterFacture" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMenuPrincipal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblCreancier" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="creancierField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Component id="descriptionField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblDateLimite" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="ddField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="mmField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="yyField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblDD" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblMM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblYY" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="rBtnFactureMensuelle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rBtnFactureUnique" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
-      </Group>
-    </DimensionLayout>
-  </Layout>
-  <SubComponents>
-    <Component class="javax.swing.JButton" name="btnMenuPrincipal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Menu principal"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JPanel" name="jPanel2">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xa;    public void paintComponent(Graphics g) {  &#xa;        Image img = Toolkit.getDefaultToolkit().getImage(  &#xa;            FenConnection.class.getResource(&quot;/img/AddBill.png&quot;));  &#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xa;    }  &#xa;};  "/>
-      </AuxValues>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="314" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="174" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" pref="141" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblMensualiteString" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMensualite" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="btnDeleteRow" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblTotalDettesString" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTotalDette" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="lblCreancier" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="creancierField" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="descriptionField" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblDateLimite" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ddField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="mmField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="yyField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rBtnFactureMensuelle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblDD" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMM" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblYY" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rBtnFactureUnique" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblMontant" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="montantField" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnMenuPrincipal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAjouterFacture" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanel3">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xa;    public void paintComponent(Graphics g) {  &#xa;        Image img = Toolkit.getDefaultToolkit().getImage(  &#xa;            FenConnection.class.getResource(&quot;/img/myBills.png&quot;));  &#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xa;    }  &#xa;};  "/>
-      </AuxValues>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="470" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-    <Component class="javax.swing.JTextField" name="creancierField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creancierFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="descriptionField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="montantField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="ddField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="mmField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="yyField">
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="rBtnFactureUnique">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="radioBtnGroup"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Facture unique"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBtnFactureUniqueActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xa;    }&#xa;});&#xa;rBtnFactureUnique.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        ddField.setEnabled(true); &#xa;        mmField.setEnabled(true); &#xa;        yyField.setEnabled(true);&#xa;    }&#xa;});"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="rBtnFactureMensuelle">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="radioBtnGroup"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Facture mensuelle"/>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xa;    }&#xa;});&#xa;rBtnFactureUnique.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        ddField.setEnabled(true); &#xa;        mmField.setEnabled(true); &#xa;        yyField.setEnabled(true); &#xa;    }&#xa;});"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDD">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="DD"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblMM">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="MM"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblYY">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="YY"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCreancier">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cr&#xe9;ancier"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDescription">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Description"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblMontant">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Montant"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDateLimite">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Date limite"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAjouterFacture">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ajouter facture"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterFactureActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="factureTable">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Menu principal"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel2">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="FactureTableModel model = new FactureTableModel(onLoadListeFacture.getListeFacture());&#xa;factureTable.setModel(model);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {&#xa;    public void paintComponent(Graphics g) {&#xa;        Image img = Toolkit.getDefaultToolkit().getImage(&#xa;            FenConnection.class.getResource(&quot;/img/lblAddBills.png&quot;));&#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xa;    }&#xa;};  "/>
           </AuxValues>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="314" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="177" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {&#xa;    public void paintComponent(Graphics g) {&#xa;        Image img = Toolkit.getDefaultToolkit().getImage(&#xa;            FenConnection.class.getResource(&quot;/img/lblMyBills.png&quot;));&#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xa;    }&#xa;};  "/>
+          </AuxValues>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="530" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Component class="javax.swing.JTextField" name="creancierField">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creancierFieldActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="descriptionField">
+        </Component>
+        <Component class="javax.swing.JTextField" name="montantField">
+        </Component>
+        <Component class="javax.swing.JTextField" name="ddField">
+        </Component>
+        <Component class="javax.swing.JTextField" name="mmField">
+        </Component>
+        <Component class="javax.swing.JTextField" name="yyField">
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="rBtnFactureUnique">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="radioBtnGroup"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Facture unique"/>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBtnFactureUniqueActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xa;        mmField.setVisible(true); yyField.setVisible(true);&#xa;        mmField.revalidate(); mmField.repaint();&#xa;        yyField.revalidate(); yyField.repaint();&#xa;        &#xa;    }&#xa;});&#xa;rBtnFactureUnique.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        ddField.setEnabled(true); &#xa;        mmField.setEnabled(true); &#xa;        yyField.setEnabled(true);&#xa;    }&#xa;});"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="rBtnFactureMensuelle">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="radioBtnGroup"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Facture mensuelle"/>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rBtnFactureMensuelle.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        mmField.setEnabled(false); mmField.setText(&quot;&quot;);&#xa;        yyField.setEnabled(false); yyField.setText(&quot;&quot;);&#xa;        mmField.setVisible(false); yyField.setVisible(false);&#xa;    }&#xa;});&#xa;rBtnFactureUnique.addActionListener(&#xa;new ActionListener(){&#xa;    public void actionPerformed(ActionEvent ie){&#xa;        ddField.setEnabled(true); &#xa;        mmField.setEnabled(true); &#xa;        yyField.setEnabled(true); &#xa;    }&#xa;});"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDD">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="DD"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMM">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MM"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblYY">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="YY"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCreancier">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cr&#xe9;ancier"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDescription">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Description"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMontant">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Montant"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDateLimite">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Date limite"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnAjouterFacture">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ajouter facture"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterFactureActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="factureTable">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="FactureTableModel model = new FactureTableModel(onLoadListeFacture.getListeFacture());&#xa;factureTable.setModel(model);"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lblMensualiteString">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Mensualit&#xe9; totale :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMensualite">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="String mensualite = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureMensuelle());">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="mensualite + &quot; $&quot;" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTotalDette">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="String dettes = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureUnique());">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="dettes + &quot; $&quot;" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnDeleteRow">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Delete row"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteRowActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTotalDettesString">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Total des dettes   :"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblMensualiteString">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mensualit&#xe9; totale :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblMensualite">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="String mensualite = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureMensuelle());">
-          <Font name="Dialog" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="mensualite + &quot; $&quot;" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblTotalDettesString">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Total des dettes   :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblTotalDette">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="String dettes = String.valueOf(FileManip.lireFichierAjouterFacture(UserSession.client).calculerSommeFactureUnique());">
-          <Font name="Dialog" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="dettes + &quot; $&quot;" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnDeleteRow">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete row"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteRowActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

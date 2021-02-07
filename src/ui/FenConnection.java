@@ -46,7 +46,7 @@ public class FenConnection extends javax.swing.JFrame {
                     FenConnection.class.getResource("/img/background.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
-        };  ;
+        };
         lblLOGO = new javax.swing.JLabel();
         userField = new javax.swing.JTextField();
         passField = new javax.swing.JPasswordField();
@@ -64,7 +64,7 @@ public class FenConnection extends javax.swing.JFrame {
 
         lblLOGO.setFont(new java.awt.Font("Agency FB", 1, 72)); // NOI18N
         lblLOGO.setForeground(new java.awt.Color(255, 102, 196));
-        lblLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        lblLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF3.gif"))); // NOI18N
 
         userField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,35 +112,37 @@ public class FenConnection extends javax.swing.JFrame {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(246, 246, 246)
-                        .addComponent(lblPassword))
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(btnQuitter))
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(btnRegister)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(246, 246, 246)
+                                .addComponent(lblPassword))
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(lblUsername))
-                            .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addGap(0, 77, Short.MAX_VALUE)
-                .addComponent(lblLOGO)
-                .addGap(70, 70, 70))
+                                .addGap(223, 223, 223)
+                                .addComponent(btnQuitter))
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGap(186, 186, 186)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(backgroundLayout.createSequentialGroup()
+                                        .addComponent(btnRegister)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(backgroundLayout.createSequentialGroup()
+                                        .addGap(60, 60, 60)
+                                        .addComponent(lblUsername))
+                                    .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 138, Short.MAX_VALUE))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblLOGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(lblLOGO, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addContainerGap()
+                .addComponent(lblLOGO, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(lblUsername)
                 .addGap(12, 12, 12)
                 .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,8 +197,6 @@ public class FenConnection extends javax.swing.JFrame {
             String pass = String.valueOf(passField.getPassword());
             if(FileManip.chercherClientDansListe(userField.getText(), pass)){
                 UserSession.client = FileManip.getClientFromFile(userField.getText(), pass);
-                JOptionPane.showMessageDialog(rootPane, "NICE SHIT BRO WELCOME",
-                    "Bienvenue !", JOptionPane.PLAIN_MESSAGE);
                 FenAppUI fenAppUi = new FenAppUI();
                 fenAppUi.setVisible(true);
                 fenAppUi.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
