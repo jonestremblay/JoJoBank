@@ -32,7 +32,7 @@ public class FenExpenses extends javax.swing.JFrame {
         background = background =  new JPanel() {
             public void paintComponent(Graphics g) {
                 Image img = Toolkit.getDefaultToolkit().getImage(
-                    FenConnection.class.getResource("/img/background.png"));
+                    FenConnection.class.getResource("/img/wowBackground.png"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };

@@ -37,7 +37,7 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="background">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="background =  new JPanel() {&#xa;    public void paintComponent(Graphics g) {&#xa;        Image img = Toolkit.getDefaultToolkit().getImage(&#xa;            FenConnection.class.getResource(&quot;/img/background.png&quot;));&#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xa;    }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="background =  new JPanel() {&#xa;    public void paintComponent(Graphics g) {&#xa;        Image img = Toolkit.getDefaultToolkit().getImage(&#xa;            FenConnection.class.getResource(&quot;/img/wowBackground.png&quot;));&#xa;        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);&#xa;    }&#xa;}"/>
       </AuxValues>
 
       <Layout>

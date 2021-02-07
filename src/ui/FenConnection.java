@@ -58,7 +58,7 @@ public class FenConnection extends javax.swing.JFrame {
 
         lblLOGO.setFont(new java.awt.Font("Agency FB", 1, 72)); // NOI18N
         lblLOGO.setForeground(new java.awt.Color(255, 102, 196));
-        lblLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF3.gif"))); // NOI18N
+        lblLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF.gif"))); // NOI18N
 
         userField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -100,7 +100,7 @@ public class FenRegister extends javax.swing.JFrame {
             }
         });
 
-        lblLogoBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF3.gif"))); // NOI18N
+        lblLogoBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF.gif"))); // NOI18N
 
         btnLogin.setBackground(new java.awt.Color(25, 23, 36));
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
