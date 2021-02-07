@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
-import java.util.ArrayList;
-import modele.Client;
-import modele.Facture;
-import modele.ListeFacture;
-import modele.ListeTransaction;
 
-/**
- *
- * @author Jones
- */
+import modele.Client;
+
+
 public abstract class UserSession {
+    
+    /* 
+    Cette classe me permet de stocker le client qui est connecté, 
+    pour simuler une session. Il est utile de conserver son nombre de transactions
+    totales, pour générer un id de transaction automatiquement avec la dernière
+    transaction entrée.
+    */
+    
+    
     public static Client client = new Client();
     public static int transactionsCount;
-//    public static ArrayList<Facture> listeFactures = new ArrayList<>();
 
    
  

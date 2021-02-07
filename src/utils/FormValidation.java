@@ -1,43 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package utils;
 
 import java.time.LocalDate;
-import java.time.Month;
 import javax.swing.JTextField;
-import ui.FenAppUI;
 
-/**
- *
- * @author Jones
- */
 public class FormValidation {
 
     /**
-     * Return true if it's OK, false if not.
+     * Return true if login's fields are not empty.
      * @param user
      * @param password
-     * @return
+     * @return true or false
      */
-
     public static boolean verifierSaisie_LOGIN(String user, char [] password){
-        if ( (user == null) || ( password == null) ){
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
-    /**
-     *
-     * @param user
-     * @param password
-     * @return
-     */
-    public static boolean verifierSaisie_REGISTER(String user, char [] password){
         if ( (user == null) || ( password == null) ){
             return false;
         } else {
@@ -48,7 +23,7 @@ public class FormValidation {
     /**
      * Check the password's validity. Is it strong enough ? Uses ASCII table.
      * @param pass
-     * @return
+     * @return true or false
      */
     public static boolean passIsValid(String pass){
         // Maj : 65 to 90 (incl)
@@ -70,7 +45,6 @@ public class FormValidation {
                 symbol++;
             }
         }
-        System.out.println(maj + ";" + digit + ";" + symbol);
          
         if(pass.length() < 8){
             return false;
@@ -82,11 +56,11 @@ public class FormValidation {
     }
     
     /**
-     * For Register form.
+     * Return true if register's fields are not empty.
      * @param name
      * @param user
      * @param pass
-     * @return
+     * @return true or false
      */
     public static boolean requiredFieldsFilled(JTextField name, JTextField user, JTextField pass){
         if (name.getText().isEmpty() || user.getText().isEmpty() || pass.getText().isEmpty()){
@@ -95,6 +69,17 @@ public class FormValidation {
         return true;
     }
     
+    /**
+     * Return true if newFacture's fields are not empty, in the case of
+     * unique radio button being selected.
+     * @param creancier
+     * @param description
+     * @param dd
+     * @param mm
+     * @param yy
+     * @param montant
+     * @return true or false
+     */
     public static boolean factureUniqueFieldsFilled(JTextField creancier, JTextField description,
                                            JTextField dd, JTextField mm, JTextField yy,
                                            JTextField montant){
@@ -107,6 +92,15 @@ public class FormValidation {
         }
     }
     
+    /**
+     * Return true if newFacture's fields are not empty, in the case of
+     * mensuelle radio button being selected.
+     * @param creancier
+     * @param description
+     * @param dd
+     * @param montant
+     * @return true or false
+     */
     public static boolean factureMensuelleFieldsFilled(JTextField creancier, JTextField description,
                                            JTextField dd, JTextField montant){
         if (creancier.getText().length() < 1 || description.getText().length() < 1
@@ -117,6 +111,13 @@ public class FormValidation {
         }
     }
     
+    /**
+     * Checks if the date is valid.
+     * @param dd
+     * @param mm
+     * @param yy
+     * @return true or false
+     */
     public static boolean checkDateValidityFacture(JTextField dd, JTextField mm, JTextField yy){
         final int DAY_LIMIT = 31;
         final int MM_LIMIT = 12;
@@ -162,10 +163,15 @@ public class FormValidation {
         }
         return dateOK;
     }
-    
-    /* 
-    Called after verification only. Return in the format : yyyy-mm-dd
-    */
+
+    /**
+     * Create a LocalDate object with user's input.
+     * Called after verification only. 
+     * @param dd
+     * @param mm
+     * @param yy
+     * @return yyyy-mm-dd
+     */
     public static LocalDate getLocalDateFromString(JTextField dd, JTextField mm, JTextField yy){
         
         int day = Integer.parseInt(dd.getText());

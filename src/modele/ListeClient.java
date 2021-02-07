@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modele;
 
 import java.util.ArrayList;
@@ -12,10 +8,7 @@ import javax.swing.JOptionPane;
 import utils.ClientComparator;
 import utils.ClientExistantException;
 
-/**
- *
- * @author Jones
- */
+
 public abstract class ListeClient {
     //private static ArrayList<Client> listeClient = new ArrayList<>();
     private static Set listeClient = new TreeSet(new ClientComparator());

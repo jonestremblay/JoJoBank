@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.io.BufferedReader;
@@ -15,11 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,14 +22,11 @@ import modele.ListeFacture;
 import modele.ListeTransaction;
 import modele.Transaction;
 
-/**
- *
- * @author Jones
- */
+/*  Cette classe me permet d'organiser mes méthodes 
+    qui manipulent les fichiers de données 
+*/
 public class FileManip {
     
-    final static String DIRECTORY = "DATA/registreClients";
-
     /**
      * Cette méthode écris dans le fichier registre un nouveau client
      * de la banque, de façon encrypté.
@@ -45,7 +34,7 @@ public class FileManip {
      */
     public static void ecrireClientDansRegistre(Client client){
         // 1. create the directory where the files are stored, if not already.
-        Path path = Paths.get(DIRECTORY);
+        Path path = Paths.get("DATA/registreClients");
         try {
             Files.createDirectories(path);
         } catch (IOException ex) {
@@ -53,7 +42,7 @@ public class FileManip {
         }
         
         // 2. Create the file for the data.
-        File registre = new File(DIRECTORY + "/" + "registre.txt");
+        File registre = new File("DATA/registreClients/" + "registre.txt");
         FileWriter fw = null;
         BufferedWriter bw = null;
         
@@ -76,22 +65,22 @@ public class FileManip {
     }
     
     /**
-     * Cette méthode lit le registre, le décrypte au passage, afin de vérifier
-     * si le client en paramètre existe.
+     * Cette méthode lit le registre client, le décrypte au passage, afin de trouver
+     * et retourner le client correspondant aux données entrés en paramètre, s'il existe.
      * @param username
      * @param password
-     * @return  [false: existePas , true: existe]
+     * @return  objet Client correspondant
      */
     public static Client getClientFromFile(String username, String password){
          // 1. create the directory where the files are stored, if not already.
-        Path path = Paths.get(DIRECTORY);
+        Path path = Paths.get("DATA/registreClients");
         try {
             Files.createDirectories(path);
         } catch (IOException ex) {
             Logger.getLogger(FileManip.class.getName()).log(Level.SEVERE, null, ex);
         }
         // 2. Read the file
-        File registre = new File(DIRECTORY + "/" + "registre.txt");
+        File registre = new File("DATA/registreClients/" + "registre.txt");
         FileReader fr = null;
         BufferedReader br = null;
         try {
@@ -99,7 +88,6 @@ public class FileManip {
             br = new BufferedReader(fr);
             String ligne;
             while ((ligne = br.readLine()) != null){
-                //clientExist = verifierClientExiste(decryptData(ligne), loginInfo);
                 ligne = decryptData(ligne);
                 String[] tokens = ligne.split(";");
                 // No need for variables here, but for reading purposes...
@@ -109,7 +97,7 @@ public class FileManip {
 
                 if(username.equals(userRegistre)){
                     if(password.equals(passRegistre)){
-                        return new Client(tokens[0], tokens[1], tokens[2]);
+                        return new Client(nameRegistre, userRegistre, passRegistre);
                     }
                 }
             }
@@ -124,11 +112,16 @@ public class FileManip {
                 }
             }
         }
-        return new Client(); 
-    // Should never happen since the method is called after checking the user exists
+        return new Client(); // Should never happen since the method is called after checking the user exists
     }
     
-    
+    /**
+     * Vérifie si le client correspondant aux données entrée en paramètre
+     * existe déjà dans la listeClient.
+     * @param user
+     * @param pass
+     * @return [false: existePas , true: existe]
+     */
     public static boolean chercherClientDansListe(String user, String pass){
         Client client = new Client(user, pass);
         for (Object c : ListeClient.getListeClient()){
@@ -138,8 +131,9 @@ public class FileManip {
         }
         return false;
     }
+    
     /**
-     *
+     * Encrypte la ligne donnée
      * @param data
      * @return [data encrypté]
      */
@@ -157,7 +151,7 @@ public class FileManip {
     }
     
     /**
-     *
+     * Décrypte la ligne donnée
      * @param encryptedData
      * @return [data décryptée]
      */
@@ -183,7 +177,7 @@ public class FileManip {
     public static void chargerCollectionClient(){
         // 1. Store les client en hashset
         Set listeClient = new HashSet();
-        File registre = new File(DIRECTORY + "/" + "registre.txt");
+        File registre = new File("DATA/registreClients/" + "registre.txt");
         FileReader fr = null;
         BufferedReader br = null;
         try {
@@ -209,10 +203,10 @@ public class FileManip {
     }
     
     /**
-     *
+     * Transforme une ligne donnée en objet client.
      * @param ligne
      * @param delimeter ; , . / (what separate values in CSV file)
-     * @return
+     * @return objet Client
      */
     public static Client convertirLigneClient(String ligne, String delimeter){
         String[] tokens = ligne.split(delimeter);
@@ -221,12 +215,12 @@ public class FileManip {
     
     
     /**
-     *
-     * @param client@return
+     * Lis le fichier contenant les factures, créer des objets factures pour chaque
+     * ligne, puis ajoute ces objets à sa liste
+     * @param client
+     * @return ListeFacture
      */
     public static ListeFacture lireFichierAjouterFacture(Client client){
-        // methode pour lire dans le fichier les factures, 
-        // créer des objets pour chaque ligne lue, et l'ajouter dans la liste.   
           // 1. create the directory where the files are stored, if not already.
         String repertoire = "DATA/registreFactures";
         Path path = Paths.get(repertoire);
@@ -261,21 +255,23 @@ public class FileManip {
         }
         return lf;
     }
-    
-//    public static Facture convertirLigneFacture(String ligne){
-//        String[] tokens = ligne.split(";");
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mon-yyyy", Locale.CANADA_FRENCH);
-//        LocalDate dateLimite = LocalDate.parse(tokens[3], formatter);
-//        return new Facture(tokens[1], tokens[2], dateLimite , Double.parseDouble(tokens[4]));
-//    }
+
+    /**
+     * Converti une ligne donnée en un objet Facture.
+     * @param ligne
+     * @return objet Facture
+     */
     public static Facture convertirLigneFacture(String ligne){
         String[] tokens = ligne.split(";");
         return new Facture(tokens[0], tokens[1], tokens[2], Double.parseDouble(tokens[3]));
     }
-    
-    /*
-    Rajoute une facture dans le fichier de facture.
-    */
+
+
+    /**
+     * Rajoute une facture dans le fichier de facture.
+     * @param client
+     * @param facture
+     */
     public static void ecrireFactureFichier(Client client, Facture facture){
         String repertoire = "DATA/registreFactures";
         Path path = Paths.get(repertoire);
@@ -311,7 +307,7 @@ public class FileManip {
      * Get new ListeFacture after having deleted the choosen row, so we could rewrite the file.
      * @param client
      * @param facture
-     * @return
+     * @return new ListeFacture
      */
     public static ListeFacture getNewListeFactureAfterDeletion(Client client, Facture factureToDelete){
           // 1. create the directory where the files are stored, if not already.
@@ -351,6 +347,12 @@ public class FileManip {
         return lf;
     }
     
+    /**
+     * Overwrites the facture's file with an entire ListeFacture, instead of only one
+     * facture. Called after having deleting one in the list.
+     * @param client
+     * @param lf
+     */
     public static void ecrireListeFactureDansFichier(Client client, ListeFacture lf){
         String repertoire = "DATA/registreFactures";
         Path path = Paths.get(repertoire);
@@ -384,7 +386,12 @@ public class FileManip {
         }
     }
     
-    
+    /**
+     * Lis le fichier contenant les transactions d'un client, et créer un objet
+     * Transaction pour chaque ligne, puis l'ajoute à sa liste. 
+     * @param client
+     * @return ListeTransaction
+     */
     public static ListeTransaction lireFichierTransaction(Client client){
         String repertoire = "DATA/registreTransactions";
         Path path = Paths.get(repertoire);
@@ -420,6 +427,12 @@ public class FileManip {
         return lt;
     }
     
+    /**
+     * Ajoute la transaction donnée en paramètre dans le fichier transaction du
+     * client donné en paramètre.
+     * @param client
+     * @param transaction
+     */
     public static void ecrireTransactionFichier(Client client, Transaction transaction){
         String repertoire = "DATA/registreTransactions";
         Path path = Paths.get(repertoire);
@@ -450,7 +463,12 @@ public class FileManip {
         }
     }
 
-    private static Transaction convertirLigneTransaction(String ligne) {
+    /**
+     * Avec une ligne donnée en paramètre, créer un objet Transaction
+     * @param ligne
+     * @return objet Transaction
+     */
+    public static Transaction convertirLigneTransaction(String ligne) {
         String[] data = ligne.split(";");
         String[] strDate = data[0].split("-");
         LocalDate date = LocalDate.of(Integer.parseInt(strDate[0]), Integer.parseInt(strDate[1]), Integer.parseInt(strDate[2]));
@@ -459,6 +477,12 @@ public class FileManip {
         return transaction;
     }
     
+    /**
+     * Search in ListeClient a client with the same username. If found,
+     * return that wantedClient.
+     * @param username
+     * @return theWantedClient obj
+     */
     public static Object getClientFromListe(String username){
         Client result = null;
         for (Object c : ListeClient.getListeClient()){
@@ -470,14 +494,15 @@ public class FileManip {
         return result;
         
     }
-    
-    
-    /* 
-    Pour générer le combo box des utilisateurs pouvant share une transaction.
-    */
+
+    /**
+     * Utilisée pour générer le combo box des utilisateurs pouvant share une transaction.
+     * Lis le fichier registreClient, et ajoute tous les username dans son ArrayList.
+     * @return une ArrayList de tous les usernames de la banque
+     */
     public static ArrayList<String> getAllUsernamesFromListeClient(){
         ArrayList<String> listeClient = new ArrayList<String>();
-        File registre = new File(DIRECTORY + "/" + "registre.txt");
+        File registre = new File("DATA/registreClients/" + "registre.txt");
         FileReader fr = null;
         BufferedReader br = null;
         try {
@@ -503,6 +528,12 @@ public class FileManip {
         return listeClient;
     }
     
+    /**
+     * Get new ListeTransaction after having deleted the choosen row, so we could rewrite the file.
+     * @param client
+     * @param transactionToDelete
+     * @return ListeTransaction
+     */
     public static ListeTransaction getNewListeTransactionAfterDeletion(Client client, Transaction transactionToDelete){
         String repertoire = "DATA/registreTransactions";
         Path path = Paths.get(repertoire);
@@ -541,7 +572,13 @@ public class FileManip {
         return lt;
     }
     
-     public static void ecrireListeTransactionFichier(Client client, ListeTransaction lt){
+    /**
+     * Overwrites the entire transaction's file of the client, with the new
+     * ListeTransaction after a deletion (after having called getNewListeTransactionAfterDeletion() )
+     * @param client
+     * @param lt
+     */
+    public static void ecrireListeTransactionFichier(Client client, ListeTransaction lt){
         String repertoire = "DATA/registreTransactions";
         Path path = Paths.get(repertoire);
         try {
