@@ -100,7 +100,7 @@ public class FenRegister extends javax.swing.JFrame {
             }
         });
 
-        lblLogoBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF.gif"))); // NOI18N
+        lblLogoBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoGIF3.gif"))); // NOI18N
 
         btnLogin.setBackground(new java.awt.Color(25, 23, 36));
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -208,8 +208,8 @@ public class FenRegister extends javax.swing.JFrame {
                 */
                 registre.createNewFile();
                 FileManip.creerRepertoireWOW(client);
-                Transaction defaultFirstTransaction = new Transaction(LocalDate.of(2021, 01, 01),
-                                            "Test", "JojoBank", "deleteME", 0, 1, client);
+                Transaction defaultFirstTransaction = new Transaction(LocalDate.of(2999, 12, 31),
+                                            "I Am", "Sorry", "don't delete me !", 0, 0, client);
                 
                 FileManip.ecrireTransactionFichier(client, defaultFirstTransaction);
                 this.dispose();

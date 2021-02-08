@@ -1,3 +1,4 @@
 2999-12-31;I am;sorry;dont delete me!;0;0;null
 2021-02-14;Divers;Fleuriste;Fleurs;39.99;1;null
 2021-01-01;Épicerie;Maxi;Première de l'année !;165.78;2;zaza
+2021-12-12;dssd;sdsd;;400.0;4;jtrudeau

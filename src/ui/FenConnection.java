@@ -189,7 +189,7 @@ public class FenConnection extends javax.swing.JFrame {
         FenRegister fenRegister = new FenRegister();
         fenRegister.setVisible(true);
         fenRegister.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
+        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed

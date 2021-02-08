@@ -1,7 +1,9 @@
 
 package utils;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class FormValidation {
@@ -178,7 +180,12 @@ public class FormValidation {
         int month = Integer.parseInt(mm.getText());
         int year = Integer.parseInt("20" + yy.getText());
         
-        return LocalDate.of(year, month, day);
+        try{
+            return LocalDate.of(year, month, day);
+        } catch (DateTimeException ex){
+            JOptionPane.showMessageDialog(null, "Invalid date. Are you sure this date exists in the calendar ?", "Invalid date", JOptionPane.ERROR_MESSAGE);
+        }
+         return LocalDate.of(year, month, day);
     }
     
     /**
